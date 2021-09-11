@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Creature", menuName = "SomethingSomethingCardGame/CreatureCard")]
-public class CreatureCard : ScriptableObject {
-	public int Id;
-	public string Name;
-	public Sprite FaceImage;
-	public string FlavourText;
-
+[CreateAssetMenu(fileName = "Creature", menuName = "SomethingSomethingCardGame/Creature Card")]
+public class CreatureCard : PlayableCard {
 	public int NorthAttack;
 	public int EastAttack;
 	public int SouthAttack;
