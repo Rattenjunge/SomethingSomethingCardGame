@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   Name: Fantastic Frog
-  FaceImage: {fileID: 0}
+  FaceImage: {fileID: 21300000, guid: b1f9a9c91ed1a544dbab9f3afe4fabca, type: 3}
   FlavourText: Jumps up and down, and if in danger, also away.
   NorthAttack: 3
   EastAttack: 2
