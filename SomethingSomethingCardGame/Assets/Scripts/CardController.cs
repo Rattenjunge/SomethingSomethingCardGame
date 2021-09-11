@@ -17,7 +17,6 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void ZoomCard(bool isZoomed)
     {
-        Debug.Log("test");
         if (isZoomed)
         {
             rect.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
