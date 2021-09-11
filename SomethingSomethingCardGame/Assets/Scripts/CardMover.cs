@@ -59,8 +59,8 @@ public class CardMover : NetworkBehaviour
             (transform as RectTransform).anchorMax = new Vector2(0.5f, 0.5f);
             (transform as RectTransform).localPosition = Vector2.zero;
 
-            playerManager.CmdCreateCardOnServer(dropZone, GetComponent<InstantiatedCard>().playableCard);
-
+            playerManager.CmdCreateCardOnServer(dropZone, GetComponent<InstantiatedCard>().playableCard.Id);
+            Destroy(this.gameObject);
             playerManager.HandCards.Remove(this.gameObject);
             isDraggable = false;
 

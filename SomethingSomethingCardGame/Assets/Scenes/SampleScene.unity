@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 25970722}
   - component: {fileID: 25970721}
   - component: {fileID: 25970723}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 57666506}
   - component: {fileID: 57666505}
   - component: {fileID: 57666507}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 193695136}
   - component: {fileID: 193695135}
   - component: {fileID: 193695137}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 692426138}
   - component: {fileID: 692426137}
   - component: {fileID: 692426139}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 765609945}
   - component: {fileID: 765609944}
   - component: {fileID: 765609946}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1256,7 +1256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -1386,7 +1386,7 @@ GameObject:
   - component: {fileID: 878046594}
   - component: {fileID: 878046593}
   - component: {fileID: 878046595}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -1567,7 +1567,7 @@ GameObject:
   - component: {fileID: 921644175}
   - component: {fileID: 921644174}
   - component: {fileID: 921644176}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -1748,7 +1748,7 @@ GameObject:
   - component: {fileID: 964573973}
   - component: {fileID: 964573972}
   - component: {fileID: 964573974}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -1929,7 +1929,7 @@ GameObject:
   - component: {fileID: 993542123}
   - component: {fileID: 993542122}
   - component: {fileID: 993542124}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2046,7 +2046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -2110,7 +2110,7 @@ GameObject:
   - component: {fileID: 1190637221}
   - component: {fileID: 1190637220}
   - component: {fileID: 1190637222}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2227,7 +2227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -2291,7 +2291,7 @@ GameObject:
   - component: {fileID: 1269802037}
   - component: {fileID: 1269802036}
   - component: {fileID: 1269802038}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2408,7 +2408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -2493,7 +2493,7 @@ GameObject:
   - component: {fileID: 1339737747}
   - component: {fileID: 1339737746}
   - component: {fileID: 1339737748}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2610,7 +2610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -2674,7 +2674,7 @@ GameObject:
   - component: {fileID: 1339893793}
   - component: {fileID: 1339893792}
   - component: {fileID: 1339893794}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2791,7 +2791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -2855,7 +2855,7 @@ GameObject:
   - component: {fileID: 1420913237}
   - component: {fileID: 1420913236}
   - component: {fileID: 1420913238}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2972,7 +2972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -3036,7 +3036,7 @@ GameObject:
   - component: {fileID: 1674872548}
   - component: {fileID: 1674872547}
   - component: {fileID: 1674872549}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3153,7 +3153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -3342,7 +3342,7 @@ GameObject:
   - component: {fileID: 1997854236}
   - component: {fileID: 1997854235}
   - component: {fileID: 1997854237}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SingleDropZone (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3459,7 +3459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
@@ -3642,7 +3642,7 @@ PrefabInstance:
     - target: {fileID: 8874011597562618930, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
       propertyPath: spawnPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 2003232512257577331, guid: 1a9515b5b65253c45b5e37b7e7b24413, type: 3}
+      objectReference: {fileID: 2003232512257577331, guid: 8d3c9c61c69ed9b44b93922a07ee77c0, type: 3}
     - target: {fileID: 8874011597562618930, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
       propertyPath: spawnPrefabs.Array.data[1]
       value: 

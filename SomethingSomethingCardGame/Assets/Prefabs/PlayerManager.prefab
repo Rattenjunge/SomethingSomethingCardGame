@@ -94,4 +94,5 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   HandCards: []
-  CardPrefab: {fileID: 2808468656847496804, guid: 1a9515b5b65253c45b5e37b7e7b24413, type: 3}
+  BattlefieldCardPrefab: {fileID: 2808468656847496804, guid: 8d3c9c61c69ed9b44b93922a07ee77c0, type: 3}
+  HandCardPrefab: {fileID: 2808468656847496804, guid: 1a9515b5b65253c45b5e37b7e7b24413, type: 3}
