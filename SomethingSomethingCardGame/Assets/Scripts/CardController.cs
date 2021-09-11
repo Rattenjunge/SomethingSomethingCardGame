@@ -20,7 +20,6 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private AudioSource audioSource;
 
-
     private void Awake()
     {
         attackScoreColors.Sort(AttackScoreColor.CompareByScore);
