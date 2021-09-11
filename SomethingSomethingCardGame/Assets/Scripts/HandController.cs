@@ -10,23 +10,23 @@ public class HandController : MonoBehaviour
 {
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private int handCardsLimit = 5;
-    [SerializeField] private List<PlayableCard> allCards;
+    [SerializeField] private List<CreatureCard> allCards;
 
-    private List<PlayableCard> cardsInHand;
+    private List<CreatureCard> cardsInHand;
     //private HorizontalLayoutGroup layoutGroup;
 
     private void Awake()
     {
-        cardsInHand = new List<PlayableCard>();
+        cardsInHand = new List<CreatureCard>();
         // layoutGroup = GetComponent<HorizontalLayoutGroup>();
 
         for (int i = 0; i < 5; i++)
         {
-            ReceiveCard(allCards[0]);
+            ReceiveCard(allCards[i]);
         }
     }
 
-    public void ReceiveCard(PlayableCard newCard)
+    public void ReceiveCard(CreatureCard newCard)
     {
         if (cardsInHand.Count == handCardsLimit)
         {
@@ -36,6 +36,6 @@ public class HandController : MonoBehaviour
         cardsInHand.Add(newCard);
 
         var newCardObject = GameObject.Instantiate(cardPrefab, this.transform);
-        newCardObject.GetComponent<InstantiatedCard>().playableCard = newCard;
+        newCardObject.GetComponent<CardController>().Init(newCard);
     }
 }

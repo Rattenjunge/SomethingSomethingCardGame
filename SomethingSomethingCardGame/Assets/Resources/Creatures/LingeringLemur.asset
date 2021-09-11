@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 4
   Name: Lingering Lemur
-  FaceImage: {fileID: 0}
+  FaceImage: {fileID: 21300000, guid: b1f9a9c91ed1a544dbab9f3afe4fabca, type: 3}
   FlavourText: Waiting, watching, ready to fight - !
   NorthAttack: 1
   EastAttack: 2
