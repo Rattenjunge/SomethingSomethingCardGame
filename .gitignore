@@ -2,6 +2,11 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+SomethingSomethingCardGame/Library/
+
+SomethingSomethingCardGame/Logs/
+
+SomethingSomethingCardGame/Temp/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -59,3 +64,11 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+SomethingSomethingCardGame/Library/
+
+SomethingSomethingCardGame/Logs/
+
+SomethingSomethingCardGame/Temp/
+
+
+.idea/.idea.SomethingSomethingCardGame.dir/.idea/
