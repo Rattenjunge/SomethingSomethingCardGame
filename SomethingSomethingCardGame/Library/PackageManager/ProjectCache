@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637669505397261074
-    m_Hash: 2521463564
+      ticks: 637669515123572217
+    m_Hash: 759986212
   m_LockFileStatus:
     m_FilePath: F:/Repositories/SomethingSomethingCardGame/SomethingSomethingCardGame/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637669505399416137
-    m_Hash: 1020354531
+      ticks: 637669515123577218
+    m_Hash: 2470619235
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
