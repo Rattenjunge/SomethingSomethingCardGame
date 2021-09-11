@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637669475237132938
-    m_Hash: 2204306383
+      ticks: 637669505397261074
+    m_Hash: 2521463564
   m_LockFileStatus:
     m_FilePath: F:/Repositories/SomethingSomethingCardGame/SomethingSomethingCardGame/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637669475340040656
-    m_Hash: 3394294237
+      ticks: 637669505399416137
+    m_Hash: 1020354531
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -1426,6 +1426,57 @@ m_PackageAssets:
       - ugui
       - Unity UI
       - Canvas
+      registry:
+        id: 
+        name: 
+        url: 
+        scopes: []
+        isDefault: 0
+        capabilities: 0
+      hasRegistry: 0
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 0
+      documentationUrl: 
+      hasRepository: 0
+      repository:
+        type: 
+        url: 
+        revision: 
+        path: 
+    - packageId: com.veriorpies.parrelsync@https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync
+      testable: 0
+      isDirectDependency: 1
+      version: 1.5.0
+      source: 5
+      resolvedPath: F:\Repositories\SomethingSomethingCardGame\SomethingSomethingCardGame\Library\PackageCache\com.veriorpies.parrelsync@bb3d5067e4
+      assetPath: Packages/com.veriorpies.parrelsync
+      name: com.veriorpies.parrelsync
+      displayName: ParrelSync
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: ParrelSync is a Unity editor extension that allows users to test
+        multiplayer gameplay without building the project by having another Unity
+        editor window opened and mirror the changes from the original project.
+      status: 4
+      errors: []
+      versions:
+        all: []
+        compatible: []
+        verified: 
+      dependencies: []
+      resolvedDependencies: []
+      keywords:
+      - Networking
+      - Utils
+      - Editor
+      - Extensions
       registry:
         id: 
         name: 
