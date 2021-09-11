@@ -93,3 +93,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  HandCards: []
+  CardPrefab: {fileID: 2808468656847496804, guid: 1a9515b5b65253c45b5e37b7e7b24413, type: 3}
