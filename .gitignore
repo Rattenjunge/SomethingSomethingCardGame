@@ -59,4 +59,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-*.log
+SomethingSomethingCardGame/Library/
+
+SomethingSomethingCardGame/Logs/
+
+SomethingSomethingCardGame/Temp/
+
