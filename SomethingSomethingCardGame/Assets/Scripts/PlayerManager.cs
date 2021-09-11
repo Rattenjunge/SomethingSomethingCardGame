@@ -21,7 +21,7 @@ public class PlayerManager : NetworkBehaviour
     private bool localPlayerHasActiveTurn = false;
     private bool cardsDealtThisTurn = false;
     private List<uint> connectedPlayerIds = new List<uint>();
-    private int localId;
+    //private int localId;
 
     private int currentActivePlayerIndex = 0;
 
