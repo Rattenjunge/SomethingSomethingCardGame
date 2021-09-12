@@ -65,7 +65,7 @@ public class BattleCalculation : NetworkBehaviour
                     if (currentBattlefieldCard != null)
                     {
                         Debug.Log("Western Card: " + currentBattlefieldCard.CreatureCard);
-                        if (currentBattlefieldCard.CreatureCard.SouthAttack < playedCard.CreatureCard.NorthAttack)
+                        if (currentBattlefieldCard.CreatureCard.EastAttack < playedCard.CreatureCard.WestAttack)
                         {
                             RpcSetOwnership(gridPosition, playerNetId);
                         }
@@ -90,7 +90,7 @@ public class BattleCalculation : NetworkBehaviour
                     if (currentBattlefieldCard != null)
                     {
                         Debug.Log("Southern Card: " + currentBattlefieldCard.CreatureCard);
-                        if (currentBattlefieldCard.CreatureCard.SouthAttack < playedCard.CreatureCard.NorthAttack)
+                        if (currentBattlefieldCard.CreatureCard.NorthAttack < playedCard.CreatureCard.SouthAttack)
                         {
                             RpcSetOwnership(gridPosition, playerNetId);
                         }
@@ -114,7 +114,7 @@ public class BattleCalculation : NetworkBehaviour
                     if (currentBattlefieldCard != null)
                     {
                         Debug.Log("Eastern Card: " + currentBattlefieldCard.CreatureCard);
-                        if (currentBattlefieldCard.CreatureCard.SouthAttack < playedCard.CreatureCard.NorthAttack)
+                        if (currentBattlefieldCard.CreatureCard.WestAttack < playedCard.CreatureCard.EastAttack)
                         {
                             RpcSetOwnership(gridPosition, playerNetId);
                         }
@@ -127,7 +127,7 @@ public class BattleCalculation : NetworkBehaviour
     [ClientRpc]
     void RpcSetOwnership(Vector2Int gridPosition, uint ownerNetId)
     {
-        gridDropZones[gridPosition.x, gridPosition.y].card?.GetComponent<BattlefieldCard>().SetControl(ownerNetId);
+        gridDropZones[gridPosition.x, gridPosition.y].card?.GetComponent<BattlefieldCard>().RpcSetControl(ownerNetId);
     }
 
 }

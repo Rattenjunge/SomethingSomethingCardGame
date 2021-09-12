@@ -27,7 +27,8 @@ public class BattlefieldCard : NetworkBehaviour
         attackScoreControllers.ForEach(controller => { controller.SetAttackScoreColors(attackScoreColors); });
     }
 
-    public void SetControl(uint netId)
+    [ClientRpc]
+    public void RpcSetControl(uint netId)
     {
         Debug.Log("Set Control " + netId, gameObject);
         currentOwner = netId;
@@ -44,7 +45,7 @@ public class BattlefieldCard : NetworkBehaviour
     [ClientRpc]
     public void RpcInit(int creatureID, uint originalOwnerNetId)
     {
-        SetControl(originalOwnerNetId);
+        RpcSetControl(originalOwnerNetId);
         CreatureCard newCard = FindObjectOfType<PlayerManager>().GetCardFromCardList(creatureID);
         creatureCard = newCard;
         originalOwnerId = originalOwnerNetId;
