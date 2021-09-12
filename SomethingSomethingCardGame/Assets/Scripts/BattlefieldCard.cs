@@ -9,14 +9,14 @@ using UnityEngine.UI;
 public class BattlefieldCard : NetworkBehaviour
 {
     [SerializeField] Image borderImage;
-    public Color ownedColor;
-    public Color lostColor;
+    public Sprite OwnedSprite;
+    public Sprite LostSprite;
     [SerializeField] Image creatureImage;
     [SerializeField] private List<AttackScoreController> attackScoreControllers;
     [SerializeField] private List<AttackScoreColor> attackScoreColors;
 
     uint originalOwnerId;
-    uint currentOwner;
+    public uint currentOwner;
     CreatureCard creatureCard;
 
     public CreatureCard CreatureCard { get => creatureCard; set => creatureCard = value; }
@@ -35,10 +35,10 @@ public class BattlefieldCard : NetworkBehaviour
         //Check if netId is client or opponent.
         if(netId == NetworkClient.connection.identity.netId)
         {
-            borderImage.color = ownedColor;
+            borderImage.sprite = OwnedSprite;
         } else
         {
-            borderImage.color = lostColor;
+            borderImage.sprite = LostSprite;
         }
     }
 

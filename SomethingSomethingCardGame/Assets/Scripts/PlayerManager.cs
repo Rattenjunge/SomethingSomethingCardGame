@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerManager : NetworkBehaviour {
     private GameObject playerArea;
-    private GameObject dropZone;
     private TurnIndicationController turnIndicator;
 
     private List<CreatureCard> cards = new List<CreatureCard>();
@@ -35,7 +34,6 @@ public class PlayerManager : NetworkBehaviour {
         Debug.Log("OnStartClient");
         base.OnStartClient();
         playerArea = GameObject.FindGameObjectWithTag("PlayerHand");
-        dropZone = GameObject.FindGameObjectWithTag("DropZoneBackground");
         foreach (var item in Resources.LoadAll<CreatureCard>("Creatures"))
         {
             cards.Add(item);
@@ -220,6 +218,13 @@ public class PlayerManager : NetworkBehaviour {
             {
                 manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
             }
+
+
+            //find winner
+            RpcFindWinder();
+
+
+
         }
         else //Find the playermanager that IS owned by the server and call CmdCreateCardOnServer there.
         {
@@ -254,5 +259,44 @@ public class PlayerManager : NetworkBehaviour {
             }
         }
         return creature;
+    }
+
+    [ClientRpc]
+    private void RpcFindWinder()
+    {
+        
+        DropZone[] dropZones = FindObjectsOfType<DropZone>();
+        
+        //if there is an empty dropzone, the game isn't over
+        for (int i = 0; i < dropZones.Length; i++)
+        {
+            if (dropZones[i].transform.childCount == 0)
+                return;
+        }
+
+        int playerScore = 0;
+        int enemyScore = 0;
+
+        for(int i = 0; i < dropZones.Length; i++)
+        {
+            if (dropZones[i].transform.GetChild(0).GetComponent<BattlefieldCard>().currentOwner == NetworkClient.connection.identity.netId)
+                playerScore++;
+            else
+                enemyScore++;
+        }
+
+        if(playerScore > enemyScore)
+        {
+            Debug.Log("YOU WIN");
+        }
+        else if(playerScore < enemyScore)
+        {
+            Debug.Log("YOU LOSE");
+        }
+        else
+        {
+            Debug.Log("DRAW");
+        }
+
     }
 }
