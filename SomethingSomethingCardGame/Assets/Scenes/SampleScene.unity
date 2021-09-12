@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 2, y: 1}
   card: {fileID: 0}
 --- !u!1 &57666499
 GameObject:
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 2, y: 3}
   card: {fileID: 0}
 --- !u!1 &193695129
 GameObject:
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 1, y: 0}
   card: {fileID: 0}
 --- !u!1 &326294837
 GameObject:
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 2, y: 2}
   card: {fileID: 0}
 --- !u!1 &765609938
 GameObject:
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 3, y: 0}
   card: {fileID: 0}
 --- !u!1 &801789358
 GameObject:
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 2, y: 0}
   card: {fileID: 0}
 --- !u!1 &921644168
 GameObject:
@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 1, y: 1}
   card: {fileID: 0}
 --- !u!1 &993542116
 GameObject:
@@ -2171,7 +2171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 3, y: 2}
   card: {fileID: 0}
 --- !u!1 &1190637214
 GameObject:
@@ -2352,7 +2352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 0, y: 1}
   card: {fileID: 0}
 --- !u!1 &1269802030
 GameObject:
@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 3, y: 3}
   card: {fileID: 0}
 --- !u!224 &1276125343 stripped
 RectTransform:
@@ -2719,7 +2719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 0, y: 3}
   card: {fileID: 0}
 --- !u!1 &1339893786
 GameObject:
@@ -2900,7 +2900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 1, y: 3}
   card: {fileID: 0}
 --- !u!1 &1420913230
 GameObject:
@@ -3081,7 +3081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 1, y: 2}
   card: {fileID: 0}
 --- !u!1 &1563368747
 GameObject:
@@ -3426,7 +3426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 3, y: 1}
   card: {fileID: 0}
 --- !u!1001 &1917830800
 PrefabInstance:
@@ -3732,7 +3732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  position: {x: 0, y: 0}
+  position: {x: 0, y: 2}
   card: {fileID: 0}
 --- !u!1001 &8874011598668162852
 PrefabInstance:
@@ -3751,7 +3751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8874011597562618930, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8874011597562618930, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
       propertyPath: spawnPrefabs.Array.data[0]
@@ -3760,7 +3760,7 @@ PrefabInstance:
     - target: {fileID: 8874011597562618930, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
       propertyPath: spawnPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7441349797368633030, guid: 3c78d9f9e176b3a49aa85c7d9b08b71f, type: 3}
     - target: {fileID: 8874011597562618931, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
       propertyPath: m_RootOrder
       value: 3

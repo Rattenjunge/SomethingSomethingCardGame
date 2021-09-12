@@ -6,7 +6,7 @@ using Mirror;
 public class DropZone : NetworkBehaviour
 {
     // Start is called before the first frame update
-    public Vector2 position = new Vector2();
+    public Vector2Int position = new Vector2Int();
     private PlayerManager playerManager;
     public InstantiatedCard card;
     private void Start()
