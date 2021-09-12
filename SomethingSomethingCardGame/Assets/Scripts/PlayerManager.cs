@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
-using System;
+
 
 public class PlayerManager : NetworkBehaviour {
     private GameObject playerArea;
@@ -15,6 +15,8 @@ public class PlayerManager : NetworkBehaviour {
     public List<GameObject> HandCards = new List<GameObject>();
     public InstantiatedCard BattlefieldCardPrefab;
     public InstantiatedCard HandCardPrefab;
+    public BattleCalculation BattleCalculationPrefab;
+    private BattleCalculation battleCalculation;
 
     private Button readyButton;
 
@@ -41,7 +43,7 @@ public class PlayerManager : NetworkBehaviour {
         for (int i = 0; i < 20; i++)
         {
 
-            cardDeck.Add(cards[UnityEngine.Random.Range(0, cards.Count)]);
+            cardDeck.Add(cards[Random.Range(0, cards.Count)]);
         }
 
         turnIndicator = GetTurnIndicator();
@@ -71,6 +73,12 @@ public class PlayerManager : NetworkBehaviour {
             IsServerVersion = false;
         }
     }
+    [Command]
+    public void CmdSpawnBattleCalculator()
+    {
+        battleCalculation = Instantiate(BattleCalculationPrefab, transform);
+        NetworkServer.Spawn(battleCalculation.gameObject, connectionToClient);
+    }
 
     [Command]
     public void CmdPlayerReady(uint nNetId, bool b) //Player has clicked ready, server now checks if all players are ready! 
@@ -88,7 +96,8 @@ public class PlayerManager : NetworkBehaviour {
                 {
                     //Start the game, figure out which player starts, unlock gameplay for that player.
                     RpcRemoveReadyButton();
-                    currentActivePlayerIndex = UnityEngine.Random.Range(0, 2);
+                    CmdSpawnBattleCalculator();
+                    currentActivePlayerIndex = Random.Range(0, 2);
                     foreach (PlayerManager manager in FindObjectsOfType<PlayerManager>())
                     {
                         manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
@@ -172,8 +181,9 @@ public class PlayerManager : NetworkBehaviour {
         for (int i = 0; i < 5 - cardsInHand; i++)
         {
             InstantiatedCard card = Instantiate(HandCardPrefab, new Vector2(+0, 0), Quaternion.identity);
-            int index = UnityEngine.Random.Range(0, cardDeck.Count);
+            int index = Random.Range(0, cardDeck.Count);
             card.playableCard = cardDeck[index];
+            card.GetComponent<CardController>().Init(card.playableCard as CreatureCard);
             HandCards.Add(card.gameObject);
             cardDeck.RemoveAt(index);
             card.transform.SetParent(playerArea.transform);
@@ -181,7 +191,7 @@ public class PlayerManager : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdCreateCardOnServer(GameObject dropZoneCell, int creatureID)
+    public void CmdCreateCardOnServer(GameObject dropZoneCell, int creatureID, uint playerNetid)
     {
         //Attention! there is no way to send scriptableobjects with sprites to the server with mirror
         //this is a workaround
@@ -189,29 +199,27 @@ public class PlayerManager : NetworkBehaviour {
         //this action should only be done by the server owned version! 
         if (hasAuthority && IsServerVersion) //Check if playermanager is owned by the server.
         {
-            CreatureCard creature = null;
-            foreach (var item in cards)
-            {
-                if (item.Id == creatureID)
-                {
-                    creature = item;
-                }
-            }
+            CreatureCard creature = GetCardFromCardList(creatureID);
+            
             dropZoneCell.GetComponent<BoxCollider2D>().enabled = false;
             InstantiatedCard serverCard = Instantiate(BattlefieldCardPrefab);
 
             serverCard.GetComponent<InstantiatedCard>().playableCard = creature;
             dropZoneCell.GetComponent<DropZone>().card = serverCard;
             NetworkServer.Spawn(serverCard.gameObject, connectionToClient);
-            RpcMoveCardToDropZoneCell(dropZoneCell, serverCard.gameObject);
+            RpcMoveCardToDropZoneCell(dropZoneCell, serverCard.gameObject, playerNetid);
+            serverCard.GetComponent<BattlefieldCard>().CreatureCard = creature;
+            serverCard.GetComponent<BattlefieldCard>().RpcInit(creatureID, playerNetid);
 
             currentActivePlayerIndex = (currentActivePlayerIndex == 0) ? 1 : 0; //check if currentActive player is 0 or 1 and flip around.
             Debug.Log("New Active Player: " + currentActivePlayerIndex);
+
+            battleCalculation.CmdCalculateBattle(dropZoneCell, serverCard.gameObject, playerNetid);
+
             foreach (PlayerManager manager in FindObjectsOfType<PlayerManager>())
             {
                 manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
             }
-            Debug.Log("Test");
         }
         else //Find the playermanager that IS owned by the server and call CmdCreateCardOnServer there.
         {
@@ -219,19 +227,32 @@ public class PlayerManager : NetworkBehaviour {
             {
                 if (manager.IsServerVersion)
                 {
-                    manager.CmdCreateCardOnServer(dropZoneCell, creatureID);
+                    manager.CmdCreateCardOnServer(dropZoneCell, creatureID, playerNetid);
                 }
             }
         }
         
     }
 
+    //TODO: originalOwnerID isn't used
     [ClientRpc]
-    public void RpcMoveCardToDropZoneCell(GameObject dropZoneCell, GameObject serverCard)
+    public void RpcMoveCardToDropZoneCell(GameObject dropZoneCell, GameObject serverCard, uint originalOwnerID)
     {
         dropZoneCell.GetComponent<BoxCollider2D>().enabled = false;
         serverCard.transform.SetParent(dropZoneCell.transform);
         serverCard.transform.localPosition = Vector2.zero;
+    }
 
+    public CreatureCard GetCardFromCardList(int creatureID)
+    {
+        CreatureCard creature = null;
+        foreach (var item in cards)
+        {
+            if(item.Id == creatureID)
+            {
+                creature = item;
+            }
+        }
+        return creature;
     }
 }
