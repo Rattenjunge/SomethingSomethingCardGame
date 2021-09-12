@@ -19,7 +19,6 @@ public class WheelLayoutGroup : MonoBehaviour {
 
 	private void ArrangeChildren() {
 		float initialAngle = degreePadding * (transform.childCount - 1) / 2;
-		Vector2 wheelCenter = transform.position + radius * Vector3.down;
 
 		for (int i = 0; i < transform.childCount; i++) {
 			// Calculate child angle
