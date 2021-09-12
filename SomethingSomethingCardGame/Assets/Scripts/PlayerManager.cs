@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
+using System;
 
-public class PlayerManager : NetworkBehaviour
-{
+public class PlayerManager : NetworkBehaviour {
     private GameObject playerArea;
     private GameObject dropZone;
+    private TurnIndicationController turnIndicator;
 
     private List<CreatureCard> cards = new List<CreatureCard>();
     private List<CreatureCard> cardDeck = new List<CreatureCard>();
@@ -40,8 +41,17 @@ public class PlayerManager : NetworkBehaviour
         for (int i = 0; i < 20; i++)
         {
 
-            cardDeck.Add(cards[Random.Range(0, cards.Count)]);
+            cardDeck.Add(cards[UnityEngine.Random.Range(0, cards.Count)]);
         }
+
+        turnIndicator = GetTurnIndicator();
+    }
+
+    private TurnIndicationController GetTurnIndicator() {
+        var turnIndicatorObject = GameObject.FindGameObjectWithTag("TurnIndicator");
+        if (turnIndicatorObject == null) return null;
+
+        return turnIndicatorObject.GetComponent<TurnIndicationController>();
     }
 
     public override void OnStartServer()
@@ -78,7 +88,7 @@ public class PlayerManager : NetworkBehaviour
                 {
                     //Start the game, figure out which player starts, unlock gameplay for that player.
                     RpcRemoveReadyButton();
-                    currentActivePlayerIndex = Random.Range(0, 2);
+                    currentActivePlayerIndex = UnityEngine.Random.Range(0, 2);
                     foreach (PlayerManager manager in FindObjectsOfType<PlayerManager>())
                     {
                         manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
@@ -125,7 +135,9 @@ public class PlayerManager : NetworkBehaviour
                 //TODO: Enable cardController click sounds and stuff
                 handCard.GetComponent<CardMover>().enabled = true;
             }
-            //TODO: Display that player is active
+            if (turnIndicator != null) {
+                turnIndicator.SetTurn(true);
+            }
 
         } else
         {
@@ -136,7 +148,9 @@ public class PlayerManager : NetworkBehaviour
                 //TODO: Disable cardController click sounds and stuff
                 handCard.GetComponent<CardMover>().enabled = false;
             }
-            //TODO: Display that player is inactive
+            if (turnIndicator != null) {
+                turnIndicator.SetTurn(false);
+            }
         }
     }
     
@@ -158,7 +172,7 @@ public class PlayerManager : NetworkBehaviour
         for (int i = 0; i < 5 - cardsInHand; i++)
         {
             InstantiatedCard card = Instantiate(HandCardPrefab, new Vector2(+0, 0), Quaternion.identity);
-            int index = Random.Range(0, cardDeck.Count);
+            int index = UnityEngine.Random.Range(0, cardDeck.Count);
             card.playableCard = cardDeck[index];
             HandCards.Add(card.gameObject);
             cardDeck.RemoveAt(index);

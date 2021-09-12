@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerHand
   - DropZoneBackground
+  - TurnIndicator
   layers:
   - Default
   - TransparentFX
