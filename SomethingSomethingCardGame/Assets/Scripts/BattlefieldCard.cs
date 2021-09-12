@@ -17,7 +17,7 @@ public class BattlefieldCard : NetworkBehaviour
     [SerializeField] private List<AttackScoreController> attackScoreControllers;
     [SerializeField] private List<AttackScoreColor> attackScoreColors;
     uint originalOwnerId;
-    PlayerManager playerManager;
+    public PlayerManager playerManager;
     CreatureCard creatureCard;
 
     public CreatureCard CreatureCard { get => creatureCard; set => creatureCard = value; }
@@ -71,4 +71,6 @@ public class BattlefieldCard : NetworkBehaviour
                 .SetAttackScore(newCard.GetAttackPointsByDirection(direction4));
         }
     }
+
+    
 }

@@ -3992,10 +3992,6 @@ PrefabInstance:
       value: NetworkManager
       objectReference: {fileID: 0}
     - target: {fileID: 8874011597562618929, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
-      propertyPath: Port
-      value: 10480
-      objectReference: {fileID: 0}
-    - target: {fileID: 8874011597562618929, guid: 2b79854470de5f34eb2bc03349ed0df2, type: 3}
       propertyPath: Timeout
       value: 2147483647
       objectReference: {fileID: 0}
