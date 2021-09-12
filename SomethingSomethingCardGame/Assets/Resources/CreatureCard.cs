@@ -17,16 +17,12 @@ public class CreatureCard : PlayableCard {
 		{
 			case Direction4.North:
 				return this.NorthAttack;
-				break;
 			case Direction4.South:
 				return SouthAttack;
-				break;
 			case Direction4.East:
 				return EastAttack;
-				break;
 			case Direction4.West:
 				return WestAttack;
-				break;
 			default:
 				throw new ArgumentOutOfRangeException(nameof(direction4), direction4, null);
 		}

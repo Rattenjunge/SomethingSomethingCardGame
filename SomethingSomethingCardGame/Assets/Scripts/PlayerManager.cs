@@ -6,18 +6,30 @@ using UnityEngine.UI;
 
 
 public class PlayerManager : NetworkBehaviour {
-    private GameObject playerArea;
-    private TurnIndicationController turnIndicator;
 
-    private List<CreatureCard> cards = new List<CreatureCard>();
-    private List<CreatureCard> cardDeck = new List<CreatureCard>();
     public List<GameObject> HandCards = new List<GameObject>();
     public InstantiatedCard BattlefieldCardPrefab;
     public InstantiatedCard HandCardPrefab;
     public BattleCalculation BattleCalculationPrefab;
-    private BattleCalculation battleCalculation;
+    public bool FightOver
+    {
+        get { return fightOver; }
+        set
+        {
+            fightOver = value;
+            if(value == true)
+            FindWinner();
+        }
+    }
 
+    private GameObject playerArea;
+    private TurnIndicationController turnIndicator;
+    private List<CreatureCard> cards = new List<CreatureCard>();
+    private List<CreatureCard> cardDeck = new List<CreatureCard>();
+    private BattleCalculation battleCalculation;
+    private WinCalculation wincalculation;
     private Button readyButton;
+    private bool fightOver = false;
 
     private int numberOfPlayers = 0;
     private bool localPlayerHasActiveTurn = false;
@@ -31,7 +43,7 @@ public class PlayerManager : NetworkBehaviour {
 
     public override void OnStartClient()
     {
-        Debug.Log("OnStartClient");
+      //  Debug.Log("OnStartClient");
         base.OnStartClient();
         playerArea = GameObject.FindGameObjectWithTag("PlayerHand");
         foreach (var item in Resources.LoadAll<CreatureCard>("Creatures"))
@@ -57,7 +69,7 @@ public class PlayerManager : NetworkBehaviour {
     public override void OnStartServer()
     {
         base.OnStartServer();
-        Debug.Log("Test " + NetworkClient.connection.identity.connectionToClient.connectionId);
+       // Debug.Log("Test " + NetworkClient.connection.identity.connectionToClient.connectionId);
     }
     
     private void Start()
@@ -78,17 +90,18 @@ public class PlayerManager : NetworkBehaviour {
         NetworkServer.Spawn(battleCalculation.gameObject, connectionToClient);
     }
 
+
     [Command]
     public void CmdPlayerReady(uint nNetId, bool b) //Player has clicked ready, server now checks if all players are ready! 
     {
         if (hasAuthority && IsServerVersion) //Check if playermanager is owned by the server.
         {
-            Debug.Log("Cmd Player Ready " + nNetId + " "+ b);
+           // Debug.Log("Cmd Player Ready " + nNetId + " "+ b);
             if (b)
             {
                 numberOfPlayers++;
                 connectedPlayerIds.Add(nNetId);
-                Debug.Log("Server detects client connection, number of players: " + numberOfPlayers);
+               // Debug.Log("Server detects client connection, number of players: " + numberOfPlayers);
 
                 if (numberOfPlayers == 2)
                 {
@@ -129,11 +142,11 @@ public class PlayerManager : NetworkBehaviour {
     public void RpcStartTurn(uint activePlayerNetId)
     {
         if (!hasAuthority) return;
-        Debug.Log("Start Turn " + activePlayerNetId + " ClientConnectionId " + NetworkClient.connection.connectionId, gameObject);
+       // Debug.Log("Start Turn " + activePlayerNetId + " ClientConnectionId " + NetworkClient.connection.connectionId, gameObject);
         if (activePlayerNetId == netId)
         {
             //Local Player is active in this turn
-            Debug.Log("Start Turn");
+           // Debug.Log("Start Turn");
             cardsDealtThisTurn = false;
             localPlayerHasActiveTurn = true;
             DealCards();
@@ -191,6 +204,7 @@ public class PlayerManager : NetworkBehaviour {
     [Command]
     public void CmdCreateCardOnServer(GameObject dropZoneCell, int creatureID, uint playerNetid)
     {
+        FightOver = false;
         //Attention! there is no way to send scriptableobjects with sprites to the server with mirror
         //this is a workaround
 
@@ -210,7 +224,7 @@ public class PlayerManager : NetworkBehaviour {
             serverCard.GetComponent<BattlefieldCard>().RpcInit(creatureID, playerNetid);
 
             currentActivePlayerIndex = (currentActivePlayerIndex == 0) ? 1 : 0; //check if currentActive player is 0 or 1 and flip around.
-            Debug.Log("New Active Player: " + currentActivePlayerIndex);
+           // Debug.Log("New Active Player: " + currentActivePlayerIndex);
 
             battleCalculation.CmdCalculateBattle(dropZoneCell, serverCard.gameObject, playerNetid);
 
@@ -218,12 +232,6 @@ public class PlayerManager : NetworkBehaviour {
             {
                 manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
             }
-
-
-            //find winner
-            RpcFindWinder();
-
-
 
         }
         else //Find the playermanager that IS owned by the server and call CmdCreateCardOnServer there.
@@ -261,10 +269,12 @@ public class PlayerManager : NetworkBehaviour {
         return creature;
     }
 
-    [ClientRpc]
-    private void RpcFindWinder()
+   
+    public void FindWinner()
     {
-        
+
+        if (fightOver == false)
+            return;
         DropZone[] dropZones = FindObjectsOfType<DropZone>();
         
         //if there is an empty dropzone, the game isn't over
@@ -284,18 +294,18 @@ public class PlayerManager : NetworkBehaviour {
             else
                 enemyScore++;
         }
-
+        
         if(playerScore > enemyScore)
         {
-            Debug.Log("YOU WIN");
+            Debug.Log("YOU WIN" + " You Score: " + playerScore + " EnemyScore: "+ enemyScore);
         }
         else if(playerScore < enemyScore)
         {
-            Debug.Log("YOU LOSE");
+            Debug.Log("YOU LOSE" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
         }
         else
         {
-            Debug.Log("DRAW");
+            Debug.Log("DRAW" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
         }
 
     }

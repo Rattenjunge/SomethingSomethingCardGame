@@ -66,8 +66,8 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   sendInterval: 0.05
-  syncPosition: 1
-  syncRotation: 1
+  syncPosition: 0
+  syncRotation: 0
   syncScale: 0
   interpolatePosition: 1
   interpolateRotation: 1
@@ -97,5 +97,4 @@ MonoBehaviour:
   BattlefieldCardPrefab: {fileID: 2808468656847496804, guid: 8d3c9c61c69ed9b44b93922a07ee77c0, type: 3}
   HandCardPrefab: {fileID: 2808468656847496804, guid: 1a9515b5b65253c45b5e37b7e7b24413, type: 3}
   BattleCalculationPrefab: {fileID: 2904663488604820500, guid: 3c78d9f9e176b3a49aa85c7d9b08b71f, type: 3}
-  battleCalculation: {fileID: 0}
   IsServerVersion: 0
