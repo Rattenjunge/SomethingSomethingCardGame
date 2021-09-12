@@ -32,4 +32,11 @@ public class ReadyButtonController : MonoBehaviour
             playerManager.CmdPlayerReady(playerManager.netId, true);
         }
     }
+
+    public void ResetButton()
+    {
+        clicked = false;
+        GetComponentInChildren<Text>().text = "Ready";
+
+    }
 }

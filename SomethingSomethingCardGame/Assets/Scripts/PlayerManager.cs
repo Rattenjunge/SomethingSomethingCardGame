@@ -5,7 +5,8 @@ using Mirror;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PlayerManager : NetworkBehaviour {
+public class PlayerManager : NetworkBehaviour
+{
 
     public List<GameObject> HandCards = new List<GameObject>();
     public InstantiatedCard BattlefieldCardPrefab;
@@ -22,12 +23,12 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
+    private GameObject readyButton;
     private GameObject playerArea;
     private TurnIndicationController turnIndicator;
     private List<CreatureCard> cards = new List<CreatureCard>();
     private List<CreatureCard> cardDeck = new List<CreatureCard>();
     private BattleCalculation battleCalculation;
-    private Button readyButton;
     private bool fightOver = false;
 
     private int numberOfPlayers = 0;
@@ -42,7 +43,7 @@ public class PlayerManager : NetworkBehaviour {
 
     public override void OnStartClient()
     {
-      //  Debug.Log("OnStartClient");
+        //  Debug.Log("OnStartClient");
         base.OnStartClient();
         playerArea = GameObject.FindGameObjectWithTag("PlayerHand");
         foreach (var item in Resources.LoadAll<CreatureCard>("Creatures"))
@@ -58,7 +59,8 @@ public class PlayerManager : NetworkBehaviour {
         turnIndicator = GetTurnIndicator();
     }
 
-    private TurnIndicationController GetTurnIndicator() {
+    private TurnIndicationController GetTurnIndicator()
+    {
         var turnIndicatorObject = GameObject.FindGameObjectWithTag("TurnIndicator");
         if (turnIndicatorObject == null) return null;
 
@@ -68,9 +70,9 @@ public class PlayerManager : NetworkBehaviour {
     public override void OnStartServer()
     {
         base.OnStartServer();
-       // Debug.Log("Test " + NetworkClient.connection.identity.connectionToClient.connectionId);
+        // Debug.Log("Test " + NetworkClient.connection.identity.connectionToClient.connectionId);
     }
-    
+
     private void Start()
     {
         if (FindObjectsOfType<PlayerManager>().Length <= 1) //Check if this is the hosts version of the player Manager! 
@@ -81,6 +83,8 @@ public class PlayerManager : NetworkBehaviour {
         {
             IsServerVersion = false;
         }
+
+        readyButton = GameObject.FindObjectOfType<ReadyButtonController>().gameObject;
     }
     [Command]
     public void CmdSpawnBattleCalculator()
@@ -88,19 +92,19 @@ public class PlayerManager : NetworkBehaviour {
         battleCalculation = Instantiate(BattleCalculationPrefab, transform);
         NetworkServer.Spawn(battleCalculation.gameObject, connectionToClient);
     }
-
+    
 
     [Command]
     public void CmdPlayerReady(uint nNetId, bool b) //Player has clicked ready, server now checks if all players are ready! 
     {
         if (hasAuthority && IsServerVersion) //Check if playermanager is owned by the server.
         {
-           // Debug.Log("Cmd Player Ready " + nNetId + " "+ b);
+            // Debug.Log("Cmd Player Ready " + nNetId + " "+ b);
             if (b)
             {
                 numberOfPlayers++;
                 connectedPlayerIds.Add(nNetId);
-               // Debug.Log("Server detects client connection, number of players: " + numberOfPlayers);
+                // Debug.Log("Server detects client connection, number of players: " + numberOfPlayers);
 
                 if (numberOfPlayers == 2)
                 {
@@ -112,15 +116,20 @@ public class PlayerManager : NetworkBehaviour {
                     {
                         manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
                     }
+                    //removing remaing cards on board
+                    if(hasAuthority)
+                    CmdCleanUpAfterGame();
                 }
-            } else
+            }
+            else
             {
                 numberOfPlayers--;
                 connectedPlayerIds.Remove(nNetId);
             }
-        } else //Find the playermanager that IS owned by the server and call CmdPlayerReady there.
+        }
+        else //Find the playermanager that IS owned by the server and call CmdPlayerReady there.
         {
-            foreach(PlayerManager manager in FindObjectsOfType<PlayerManager>())
+            foreach (PlayerManager manager in FindObjectsOfType<PlayerManager>())
             {
                 if (manager.IsServerVersion)
                 {
@@ -128,37 +137,41 @@ public class PlayerManager : NetworkBehaviour {
                 }
             }
         }
+
+        
     }
 
-    [ClientRpc] 
+    [ClientRpc]
     public void RpcRemoveReadyButton()
     {
-        FindObjectOfType<ReadyButtonController>().gameObject.SetActive(false);
+        readyButton.SetActive(false);
     }
 
 
-    [ClientRpc] 
+    [ClientRpc]
     public void RpcStartTurn(uint activePlayerNetId)
     {
         if (!hasAuthority) return;
-       // Debug.Log("Start Turn " + activePlayerNetId + " ClientConnectionId " + NetworkClient.connection.connectionId, gameObject);
+        // Debug.Log("Start Turn " + activePlayerNetId + " ClientConnectionId " + NetworkClient.connection.connectionId, gameObject);
         if (activePlayerNetId == netId)
         {
             //Local Player is active in this turn
-           // Debug.Log("Start Turn");
+            // Debug.Log("Start Turn");
             cardsDealtThisTurn = false;
             localPlayerHasActiveTurn = true;
             DealCards();
-            foreach(var handCard in HandCards)
+            foreach (var handCard in HandCards)
             {
                 //TODO: Enable cardController click sounds and stuff
                 handCard.GetComponent<CardMover>().enabled = true;
             }
-            if (turnIndicator != null) {
+            if (turnIndicator != null)
+            {
                 turnIndicator.SetTurn(true);
             }
 
-        } else
+        }
+        else
         {
             //Enemy Player is active in this turn.
             localPlayerHasActiveTurn = false;
@@ -167,13 +180,14 @@ public class PlayerManager : NetworkBehaviour {
                 //TODO: Disable cardController click sounds and stuff
                 handCard.GetComponent<CardMover>().enabled = false;
             }
-            if (turnIndicator != null) {
+            if (turnIndicator != null)
+            {
                 turnIndicator.SetTurn(false);
             }
         }
     }
-    
-    
+
+
 
 
     public void DealCards()
@@ -211,7 +225,7 @@ public class PlayerManager : NetworkBehaviour {
         if (hasAuthority && IsServerVersion) //Check if playermanager is owned by the server.
         {
             CreatureCard creature = GetCardFromCardList(creatureID);
-            
+
             dropZoneCell.GetComponent<BoxCollider2D>().enabled = false;
             InstantiatedCard serverCard = Instantiate(BattlefieldCardPrefab);
 
@@ -223,7 +237,7 @@ public class PlayerManager : NetworkBehaviour {
             serverCard.GetComponent<BattlefieldCard>().RpcInit(creatureID, playerNetid);
 
             currentActivePlayerIndex = (currentActivePlayerIndex == 0) ? 1 : 0; //check if currentActive player is 0 or 1 and flip around.
-           // Debug.Log("New Active Player: " + currentActivePlayerIndex);
+                                                                                // Debug.Log("New Active Player: " + currentActivePlayerIndex);
 
             battleCalculation.CmdCalculateBattle(dropZoneCell, serverCard.gameObject, playerNetid);
 
@@ -243,7 +257,7 @@ public class PlayerManager : NetworkBehaviour {
                 }
             }
         }
-        
+
     }
 
     //TODO: originalOwnerID isn't used
@@ -260,7 +274,7 @@ public class PlayerManager : NetworkBehaviour {
         CreatureCard creature = null;
         foreach (var item in cards)
         {
-            if(item.Id == creatureID)
+            if (item.Id == creatureID)
             {
                 creature = item;
             }
@@ -268,14 +282,14 @@ public class PlayerManager : NetworkBehaviour {
         return creature;
     }
 
-  
+
     public void FindWinner()
     {
 
         if (fightOver == false)
             return;
         DropZone[] dropZones = FindObjectsOfType<DropZone>();
-        
+
         //if there is an empty dropzone, the game isn't over
         for (int i = 0; i < dropZones.Length; i++)
         {
@@ -286,19 +300,19 @@ public class PlayerManager : NetworkBehaviour {
         int playerScore = 0;
         int enemyScore = 0;
 
-        for(int i = 0; i < dropZones.Length; i++)
+        for (int i = 0; i < dropZones.Length; i++)
         {
             if (dropZones[i].transform.GetChild(0).GetComponent<BattlefieldCard>().currentOwner == NetworkClient.connection.identity.netId)
                 playerScore++;
             else
                 enemyScore++;
         }
-        
-        if(playerScore > enemyScore)
+
+        if (playerScore > enemyScore)
         {
-            Debug.Log("YOU WIN" + " You Score: " + playerScore + " EnemyScore: "+ enemyScore);
+            Debug.Log("YOU WIN" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
         }
-        else if(playerScore < enemyScore)
+        else if (playerScore < enemyScore)
         {
             Debug.Log("YOU LOSE" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
         }
@@ -306,7 +320,47 @@ public class PlayerManager : NetworkBehaviour {
         {
             Debug.Log("DRAW" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
         }
-
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            CleanUpAfterGame();
     }
+
+
+    [Command]
+    void CmdCleanUpAfterGame()
+    {
+        DropZone[] dropZones = FindObjectsOfType<DropZone>();
+        foreach (var item in dropZones)
+        {
+            item.GetComponent<BoxCollider2D>().enabled = true;
+            if (item.transform.childCount > 0)
+                NetworkServer.Destroy(item.transform.GetChild(0).gameObject);
+        }
+
+    }
+
+
+    void CleanUpAfterGame()
+    {
+        DropZone[] dropZones = FindObjectsOfType<DropZone>();
+        foreach (var item in dropZones)
+        {
+            item.GetComponent<BoxCollider2D>().enabled = true;
+           
+        }
+        foreach (var item in HandCards)
+        {
+            Destroy(item);
+        }
+        HandCards.Clear();
+        cardDeck.Clear();
+
+        for (int i = 0; i < 20; i++)
+        {
+
+            cardDeck.Add(cards[Random.Range(0, cards.Count)]);
+        }
+        readyButton.SetActive(true);
+        readyButton.GetComponent<ReadyButtonController>().ResetButton();
+        numberOfPlayers = 0;
+    }
+
 }
