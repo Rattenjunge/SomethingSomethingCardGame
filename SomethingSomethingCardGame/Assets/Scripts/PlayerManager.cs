@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : NetworkBehaviour {
 
@@ -17,8 +17,8 @@ public class PlayerManager : NetworkBehaviour {
         set
         {
             fightOver = value;
-            if(value == true)
-            FindWinner();
+            if (value == true)
+                FindWinner();
         }
     }
 
@@ -27,7 +27,6 @@ public class PlayerManager : NetworkBehaviour {
     private List<CreatureCard> cards = new List<CreatureCard>();
     private List<CreatureCard> cardDeck = new List<CreatureCard>();
     private BattleCalculation battleCalculation;
-    private WinCalculation wincalculation;
     private Button readyButton;
     private bool fightOver = false;
 
@@ -269,7 +268,7 @@ public class PlayerManager : NetworkBehaviour {
         return creature;
     }
 
-   
+  
     public void FindWinner()
     {
 
@@ -308,5 +307,6 @@ public class PlayerManager : NetworkBehaviour {
             Debug.Log("DRAW" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
         }
 
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

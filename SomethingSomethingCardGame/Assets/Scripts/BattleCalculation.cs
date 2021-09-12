@@ -25,7 +25,7 @@ public class BattleCalculation : NetworkBehaviour
     [Command]
     public void CmdCalculateBattle(GameObject cellObject, GameObject playedCardObject, uint playerNetId)
     {
-
+        Fought = false;
 
         //Calculation worked for the host, even ownership swapped! did not work for the other client tho! 
         DropZone cell = cellObject.GetComponent<DropZone>();
@@ -57,9 +57,9 @@ public class BattleCalculation : NetworkBehaviour
                 Fought = true;
             }
         }
-        if(!Fought)
+        if(!Fought && hasAuthority)
         {
-            playerManager.FightOver = true;
+            RpcTellClientFightisOver();
         }
     }
     private int? GetCellAttack(Vector2Int gridPosition, Direction4 attackDirection)
@@ -131,5 +131,10 @@ public class BattleCalculation : NetworkBehaviour
             this.Vector = vector;
             this.Direction = direction;
         }
+    }
+    [ClientRpc]
+    void RpcTellClientFightisOver()
+    {
+        playerManager.FightOver = true;
     }
 }
