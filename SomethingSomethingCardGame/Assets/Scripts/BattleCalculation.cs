@@ -3,131 +3,105 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleCalculation : NetworkBehaviour
-{
-    BattleCalculation Instance;
+public class BattleCalculation : NetworkBehaviour {
+	BattleCalculation Instance;
 
-    DropZone[,] gridDropZones = new DropZone[4,4];
+	DropZone[,] gridDropZones = new DropZone[4, 4];
 
-    private void Start()
-    {
-        DropZone[] dropZones = FindObjectsOfType<DropZone>();
-        foreach(DropZone zone in dropZones)
-        {
-            gridDropZones[zone.position.x, zone.position.y] = zone;
-        }
-    }
+	private void Start() {
+		DropZone[] dropZones = FindObjectsOfType<DropZone>();
+		foreach (DropZone zone in dropZones) {
+			gridDropZones[zone.position.x, zone.position.y] = zone;
+		}
+	}
 
-    [Command]
-    public void CmdCalculateBattle(GameObject cellObject, GameObject playedCardObject, uint playerNetId)
-    {
-        //Calculation worked for the host, even ownership swapped! did not work for the other client tho! 
-        DropZone cell = cellObject.GetComponent<DropZone>();
-        BattlefieldCard playedCard = playedCardObject.GetComponent<BattlefieldCard>();
-        Debug.Log("Played Card: " + playedCard);
-        Vector2Int placedPosition = cell.position;
-        //calculate NORTH value:
-        if(placedPosition.y > 0)
-        {
-            Vector2Int gridPosition = placedPosition + Vector2Int.down;
+	[Command]
+	public void CmdCalculateBattle(GameObject cellObject, GameObject playedCardObject, uint playerNetId) {
+		//Calculation worked for the host, even ownership swapped! did not work for the other client tho! 
+		DropZone cell = cellObject.GetComponent<DropZone>();
+		BattlefieldCard playedCard = playedCardObject.GetComponent<BattlefieldCard>();
+		Debug.Log("Played Card: " + playedCard);
+		Vector2Int placedPosition = cell.position;
 
-            DropZone current = gridDropZones[gridPosition.x, gridPosition.y];
-            if (current != null)
-            {
-                InstantiatedCard currentCard = current.card;
-                if(currentCard != null)
-                {
-                    BattlefieldCard currentBattlefieldCard = currentCard.GetComponent<BattlefieldCard>();
-                    if(currentBattlefieldCard!= null)
-                    {
-                        Debug.Log("Northern Card: " + currentBattlefieldCard.CreatureCard);
-                        if (currentBattlefieldCard.CreatureCard.SouthAttack < playedCard.CreatureCard.NorthAttack)
-                        {
-                            RpcSetOwnership(gridPosition, playerNetId);
-                        }
-                    }
-                }
-            }
-        }
+		// For every direction/neighbour
+		foreach (DirectionPack direction in DirectionPack.allDirections) {
+			Vector2Int neighbourPosition = placedPosition + direction.Vector;
 
-        //Calculate West value:
-        if(placedPosition.x > 0)
-        {
-            Vector2Int gridPosition = placedPosition + Vector2Int.left;
+			// Calculate attack
+			Direction4 oppositeDirection = GetOppositeDirection(direction.Direction);
+			int? neighbourAttack = GetCellAttack(neighbourPosition, oppositeDirection);
 
-            DropZone current = gridDropZones[gridPosition.x, gridPosition.y];
-            if (current != null)
-            {
-                InstantiatedCard currentCard = current.card;
-                if (currentCard != null)
-                {
-                    BattlefieldCard currentBattlefieldCard = currentCard.GetComponent<BattlefieldCard>();
-                    if (currentBattlefieldCard != null)
-                    {
-                        Debug.Log("Western Card: " + currentBattlefieldCard.CreatureCard);
-                        if (currentBattlefieldCard.CreatureCard.EastAttack < playedCard.CreatureCard.WestAttack)
-                        {
-                            RpcSetOwnership(gridPosition, playerNetId);
-                        }
-                    }
-                }
-            }
-        }
+			// Invalid cell selected
+			if (neighbourAttack == null) {
+				continue;
+			}
 
-        //Calculate South value:
-        if(placedPosition.y < 3)
-        {
-            Vector2Int gridPosition = placedPosition + Vector2Int.up;
+			// Calculate winner
+			int cleanNeighbourAttack = neighbourAttack ?? 0;
+			int playedAttack = playedCard.CreatureCard.GetAttackPointsByDirection(direction.Direction);
+			if (cleanNeighbourAttack < playedAttack) {
+				RpcSetOwnership(neighbourPosition, playerNetId);
+			}
+		}
+	}
+
+	private int? GetCellAttack(Vector2Int gridPosition, Direction4 attackDirection) {
+		if (gridPosition.x < 0 || gridPosition.x > 3 ||
+			gridPosition.y < 0 || gridPosition.y > 3) {
+			return null;
+		}
+
+		var dropzone = gridDropZones[gridPosition.x, gridPosition.y];
+
+		// Is dropzone empty?
+		if (dropzone == null) {
+			return null;
+		}
+
+		try {
+			CreatureCard creature = dropzone.card.GetComponent<BattlefieldCard>().CreatureCard;
+			return creature.GetAttackPointsByDirection(attackDirection);
+		} catch {
+			return null;
+		}
+	}
 
 
-            DropZone current = gridDropZones[gridPosition.x, gridPosition.y];
-            if (current != null)
-            {
-                InstantiatedCard currentCard = current.card;
-                if (currentCard != null)
-                {
-                    BattlefieldCard currentBattlefieldCard = currentCard.GetComponent<BattlefieldCard>();
-                    if (currentBattlefieldCard != null)
-                    {
-                        Debug.Log("Southern Card: " + currentBattlefieldCard.CreatureCard);
-                        if (currentBattlefieldCard.CreatureCard.NorthAttack < playedCard.CreatureCard.SouthAttack)
-                        {
-                            RpcSetOwnership(gridPosition, playerNetId);
-                        }
-                    }
-                }
-            }
-        }
+	private Direction4 GetOppositeDirection(Direction4 attackDirection) {
+		switch (attackDirection) {
+			case Direction4.North:
+				return Direction4.South;
+			case Direction4.South:
+				return Direction4.North;
+			case Direction4.East:
+				return Direction4.West;
+			case Direction4.West:
+				return Direction4.East;
+			default:
+				throw new System.Exception("Not a valid direction.");
+		}
+	}
 
-        //Calculate East value:
-        if (placedPosition.x < 3)
-        {
-            Vector2Int gridPosition = placedPosition + Vector2Int.right;
 
-            DropZone current = gridDropZones[gridPosition.x, gridPosition.y];
-            if (current != null)
-            {
-                InstantiatedCard currentCard = current.card;
-                if (currentCard != null)
-                {
-                    BattlefieldCard currentBattlefieldCard = currentCard.GetComponent<BattlefieldCard>();
-                    if (currentBattlefieldCard != null)
-                    {
-                        Debug.Log("Eastern Card: " + currentBattlefieldCard.CreatureCard);
-                        if (currentBattlefieldCard.CreatureCard.WestAttack < playedCard.CreatureCard.EastAttack)
-                        {
-                            RpcSetOwnership(gridPosition, playerNetId);
-                        }
-                    }
-                }
-            }
-        }
-    }
+	[ClientRpc]
+	void RpcSetOwnership(Vector2Int gridPosition, uint ownerNetId) {
+		gridDropZones[gridPosition.x, gridPosition.y].card?.GetComponent<BattlefieldCard>().RpcSetControl(ownerNetId);
+	}
 
-    [ClientRpc]
-    void RpcSetOwnership(Vector2Int gridPosition, uint ownerNetId)
-    {
-        gridDropZones[gridPosition.x, gridPosition.y].card?.GetComponent<BattlefieldCard>().RpcSetControl(ownerNetId);
-    }
+	class DirectionPack {
+		public Vector2Int Vector;
+		public Direction4 Direction;
 
+		public static DirectionPack[] allDirections = new DirectionPack[] {
+			new DirectionPack(Vector2Int.down, Direction4.North),
+			new DirectionPack(Vector2Int.up, Direction4.South), 
+			new DirectionPack(Vector2Int.right, Direction4.East),
+			new DirectionPack(Vector2Int.left, Direction4.West)
+		};
+
+		public DirectionPack(Vector2Int vector, Direction4 direction) {
+			this.Vector = vector;
+			this.Direction = direction;
+		}
+	}
 }
