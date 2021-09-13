@@ -12,16 +12,16 @@ public class PlayerManager : NetworkBehaviour
     public InstantiatedCard BattlefieldCardPrefab;
     public InstantiatedCard HandCardPrefab;
     public BattleCalculation BattleCalculationPrefab;
-    public bool FightOver
-    {
-        get { return fightOver; }
-        set
-        {
-            fightOver = value;
-            if (value == true)
-                FindWinner();
-        }
-    }
+    //  public bool FightOver
+    //  {
+    //      get { return fightOver; }
+    //      set
+    //      {
+    //          fightOver = value;
+    //          if (value == true)
+    //              FindWinner();
+    //      }
+    //  }
 
     private GameObject readyButton;
     private GameObject playerArea;
@@ -92,7 +92,7 @@ public class PlayerManager : NetworkBehaviour
         battleCalculation = Instantiate(BattleCalculationPrefab, transform);
         NetworkServer.Spawn(battleCalculation.gameObject, connectionToClient);
     }
-    
+
 
     [Command]
     public void CmdPlayerReady(uint nNetId, bool b) //Player has clicked ready, server now checks if all players are ready! 
@@ -117,8 +117,8 @@ public class PlayerManager : NetworkBehaviour
                         manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
                     }
                     //removing remaing cards on board
-                    if(hasAuthority)
-                    CmdCleanUpAfterGame();
+                    if (hasAuthority)
+                        CmdCleanUpAfterGame();
                 }
             }
             else
@@ -138,7 +138,7 @@ public class PlayerManager : NetworkBehaviour
             }
         }
 
-        
+
     }
 
     [ClientRpc]
@@ -217,7 +217,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdCreateCardOnServer(GameObject dropZoneCell, int creatureID, uint playerNetid)
     {
-        FightOver = false;
+        // FightOver = false;
         //Attention! there is no way to send scriptableobjects with sprites to the server with mirror
         //this is a workaround
 
@@ -257,7 +257,7 @@ public class PlayerManager : NetworkBehaviour
                 }
             }
         }
-
+        CmdCalculateWinner();
     }
 
     //TODO: originalOwnerID isn't used
@@ -283,46 +283,46 @@ public class PlayerManager : NetworkBehaviour
     }
 
 
-    public void FindWinner()
-    {
-
-        if (fightOver == false)
-            return;
-        DropZone[] dropZones = FindObjectsOfType<DropZone>();
-
-        //if there is an empty dropzone, the game isn't over
-        for (int i = 0; i < dropZones.Length; i++)
-        {
-            if (dropZones[i].transform.childCount == 0)
-                return;
-        }
-
-        int playerScore = 0;
-        int enemyScore = 0;
-
-        for (int i = 0; i < dropZones.Length; i++)
-        {
-            if (dropZones[i].transform.GetChild(0).GetComponent<BattlefieldCard>().currentOwner == NetworkClient.connection.identity.netId)
-                playerScore++;
-            else
-                enemyScore++;
-        }
-
-        if (playerScore > enemyScore)
-        {
-            Debug.Log("YOU WIN" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
-        }
-        else if (playerScore < enemyScore)
-        {
-            Debug.Log("YOU LOSE" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
-        }
-        else
-        {
-            Debug.Log("DRAW" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
-        }
-            CleanUpAfterGame();
-    }
-
+    //  public void FindWinner()
+    //  {
+    //
+    //      if (fightOver == false)
+    //          return;
+    //      DropZone[] dropZones = FindObjectsOfType<DropZone>();
+    //
+    //      //if there is an empty dropzone, the game isn't over
+    //      for (int i = 0; i < dropZones.Length; i++)
+    //      {
+    //          if (dropZones[i].transform.childCount == 0)
+    //              return;
+    //      }
+    //
+    //      int playerScore = 0;
+    //      int enemyScore = 0;
+    //
+    //      for (int i = 0; i < dropZones.Length; i++)
+    //      {
+    //          if (dropZones[i].transform.GetChild(0).GetComponent<BattlefieldCard>().currentOwner == NetworkClient.connection.identity.netId)
+    //              playerScore++;
+    //          else
+    //              enemyScore++;
+    //      }
+    //
+    //      if (playerScore > enemyScore)
+    //      {
+    //          Debug.Log("YOU WIN" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
+    //      }
+    //      else if (playerScore < enemyScore)
+    //      {
+    //          Debug.Log("YOU LOSE" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
+    //      }
+    //      else
+    //      {
+    //          Debug.Log("DRAW" + " You Score: " + playerScore + " EnemyScore: " + enemyScore);
+    //      }
+    //      CleanUpAfterGame();
+    //  }
+    //
 
     [Command]
     void CmdCleanUpAfterGame()
@@ -344,7 +344,7 @@ public class PlayerManager : NetworkBehaviour
         foreach (var item in dropZones)
         {
             item.GetComponent<BoxCollider2D>().enabled = true;
-           
+
         }
         foreach (var item in HandCards)
         {
@@ -362,5 +362,77 @@ public class PlayerManager : NetworkBehaviour
         readyButton.GetComponent<ReadyButtonController>().ResetButton();
         numberOfPlayers = 0;
     }
+
+    [TargetRpc]
+    public void TargetDisplayWinner(NetworkConnection player, string WinState)
+    {
+        if (WinState == "WIN")
+        {
+            Debug.Log("YOU WIN");
+        }
+        else if (WinState == "LOST")
+        {
+            Debug.Log("YOU LOST");
+        }
+        else if (WinState == "DRAW")
+        {
+            Debug.Log("DRAW");
+        }
+        else
+        {
+            Debug.Log("TYPO in Winstate");
+        }
+
+    }
+
+
+
+
+    [Command]
+    void CmdCalculateWinner()
+    {
+        DropZone[] gridDropZones = FindObjectsOfType<DropZone>();
+        foreach (var item in gridDropZones)
+        {
+            if (item.transform.childCount == 0)
+                return;
+        }
+
+        int Player1Count = 0;
+        int PLayer2Count = 0;
+        PlayerManager[] playerManagers = FindObjectsOfType<PlayerManager>();
+        if (!hasAuthority)
+            return;
+        foreach (var item in gridDropZones)
+        {
+            if(item.transform.GetChild(0).GetComponent<BattlefieldCard>() == null)
+            {
+                Debug.Log("ERROR");
+                return;
+            }
+            if (item.transform.GetChild(0).GetComponent<BattlefieldCard>().currentOwner == playerManagers[0].netId)
+                Player1Count++;
+            else
+                PLayer2Count++;
+        }
+        Debug.Log("Player1: " + Player1Count + " / Player2: " + PLayer2Count);
+        if (Player1Count > PLayer2Count)
+        {
+            TargetDisplayWinner(playerManagers[0].GetComponent<NetworkIdentity>().connectionToClient, "WIN");
+            TargetDisplayWinner(playerManagers[1].GetComponent<NetworkIdentity>().connectionToClient, "LOST");
+        }
+        else if (Player1Count < PLayer2Count)
+        {
+            TargetDisplayWinner(playerManagers[1].GetComponent<NetworkIdentity>().connectionToClient, "WIN");
+            TargetDisplayWinner(playerManagers[0].GetComponent<NetworkIdentity>().connectionToClient, "LOST");
+        }
+        else
+        {
+            TargetDisplayWinner(playerManagers[1].GetComponent<NetworkIdentity>().connectionToClient, "DRAW");
+            TargetDisplayWinner(playerManagers[0].GetComponent<NetworkIdentity>().connectionToClient, "DRAW");
+        }
+
+    }
+
 
 }
