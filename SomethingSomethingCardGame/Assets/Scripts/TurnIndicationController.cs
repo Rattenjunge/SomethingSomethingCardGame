@@ -12,18 +12,22 @@ public class TurnIndicationController : MonoBehaviour {
 	[SerializeField] private bool highlightWaiting = false;
 	[SerializeField] private Image imageComponent;
 	[SerializeField] private AudioSource audioSource;
-
-	[SerializeField] private Vector2 standbyPosition = Vector2.zero;
-	[SerializeField] private Vector2 highlightPosition;
-	[SerializeField] private float highlightScale = 3;
-	[SerializeField] private float standbyScale= 1;
+	[SerializeField] private Animator animator;
 	[SerializeField] private AudioClip highlightSound;
 
-	private bool doHighlight { get { return (isTurn && highlightTurn) || (!isTurn && highlightWaiting); } }
+	enum TransitionState {
+		
+	}
 
-	private void Awake() {
-		(transform as RectTransform).anchoredPosition = standbyPosition;
-		(transform as RectTransform).localScale = Vector2.one * standbyScale;
+	private bool doHighlight { get { return (isTurn && highlightTurn) || (!isTurn && highlightWaiting); } }
+	private Sprite CurrentImage {
+		get {
+			if (isTurn) {
+				return turnImage;
+			} else {
+				return waitingImage;
+			}
+		}
 	}
 
 	public void SetTurn(bool isTurn) {
@@ -33,32 +37,17 @@ public class TurnIndicationController : MonoBehaviour {
 		}
 		this.isTurn = isTurn;
 
-		// Choose the correct image to display
-		Sprite newImage = waitingImage;
-		if (isTurn) {
-			newImage = turnImage;
-		}
 
-		// Display new image
-		imageComponent.sprite = newImage;
-
-		// Do highlight, depending on state
 		if (doHighlight) {
-			(transform as RectTransform).anchoredPosition = highlightPosition;
-			(transform as RectTransform).localScale = Vector2.one * highlightScale;
-
+			animator.SetTrigger("exchange");
 			audioSource.PlayOneShot(highlightSound);
 		} else {
-			(transform as RectTransform).anchoredPosition = standbyPosition;
-			(transform as RectTransform).localScale = Vector2.one * standbyScale;
+			animator.SetTrigger("flip");
 		}
 	}
 
-	public void Update() {
-		if (doHighlight) {
-			(transform as RectTransform).anchoredPosition = Vector2.Lerp((transform as RectTransform).anchoredPosition, standbyPosition, Time.deltaTime);
-			(transform as RectTransform).localScale = Vector2.Lerp((transform as RectTransform).localScale, Vector2.one * standbyScale, Time.deltaTime);
-		}
+	private void UpdateImage() {
+		imageComponent.sprite = CurrentImage;
 	}
 
 

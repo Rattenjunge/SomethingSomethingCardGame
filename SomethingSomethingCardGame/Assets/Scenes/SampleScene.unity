@@ -2400,6 +2400,7 @@ GameObject:
   - component: {fileID: 1159475468}
   - component: {fileID: 1159475474}
   - component: {fileID: 1159475473}
+  - component: {fileID: 1159475476}
   m_Layer: 5
   m_Name: TurnIndicator
   m_TagString: TurnIndicator
@@ -2522,10 +2523,7 @@ MonoBehaviour:
   highlightWaiting: 0
   imageComponent: {fileID: 1159475470}
   audioSource: {fileID: 1159475468}
-  standbyPosition: {x: -150, y: -105.3}
-  highlightPosition: {x: -960, y: -540}
-  highlightScale: 3
-  standbyScale: 1
+  animator: {fileID: 1159475476}
   highlightSound: {fileID: 8300000, guid: ab039c0a5cd692b4d80a8212f3b9cd3a, type: 3}
 --- !u!114 &1159475470
 MonoBehaviour:
@@ -2630,6 +2628,25 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!95 &1159475476
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159475467}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 270f21f11072eb243b39acd7b589c971, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1190637214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3985,22 +4002,6 @@ PrefabInstance:
     - target: {fileID: 6738089903095448410, guid: c605784ce92a24a449b045e32b91e810, type: 3}
       propertyPath: sceneId
       value: 865594463
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Spacing.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Spacing.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Constraint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_ChildAlignment
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7773211459680262648, guid: c605784ce92a24a449b045e32b91e810, type: 3}
       propertyPath: m_Name
