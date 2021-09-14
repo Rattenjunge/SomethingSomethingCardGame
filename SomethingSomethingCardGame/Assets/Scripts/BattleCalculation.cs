@@ -57,10 +57,10 @@ public class BattleCalculation : NetworkBehaviour
                 Fought = true;
             }
         }
-        if(!Fought && hasAuthority)
-        {
-            RpcTellClientFightisOver();
-        }
+        // if(!Fought && hasAuthority)
+        // {
+        //     RpcTellClientFightisOver();
+        // }
     }
     private int? GetCellAttack(Vector2Int gridPosition, Direction4 attackDirection)
     {
@@ -111,7 +111,7 @@ public class BattleCalculation : NetworkBehaviour
     [ClientRpc]
     void RpcSetOwnership(Vector2Int gridPosition, uint ownerNetId)
     {
-        gridDropZones[gridPosition.x, gridPosition.y].card?.GetComponent<BattlefieldCard>().RpcSetControl(ownerNetId, true);
+        gridDropZones[gridPosition.x, gridPosition.y].card?.GetComponent<BattlefieldCard>().RpcSetControl(ownerNetId);
     }
 
     class DirectionPack
@@ -132,9 +132,13 @@ public class BattleCalculation : NetworkBehaviour
             this.Direction = direction;
         }
     }
-    [ClientRpc]
-    void RpcTellClientFightisOver()
-    {
-        playerManager.FightOver = true;
-    }
+ //[ClientRpc]
+ //void RpcTellClientFightisOver()
+ //{
+ //    playerManager.FightOver = true;
+ //}
+ //
+
+
+  
 }

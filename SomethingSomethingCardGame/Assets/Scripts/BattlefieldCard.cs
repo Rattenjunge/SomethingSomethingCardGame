@@ -34,7 +34,7 @@ public class BattlefieldCard : NetworkBehaviour
         playerManager = networkIdentity.GetComponent<PlayerManager>();
     }
     [ClientRpc]
-    public void RpcSetControl(uint netId, bool afterFight)
+    public void RpcSetControl(uint netId)
     {
         //Debug.Log("Set Control " + netId, gameObject);
         currentOwner = netId;
@@ -47,17 +47,17 @@ public class BattlefieldCard : NetworkBehaviour
         {
             borderImage.sprite = LostSprite;
         }
-        if (afterFight)
-        {
-            playerManager.FightOver = true;
-        }
+       //if (afterFight)
+       //{
+       //    playerManager.FightOver = true;
+       //}
     }
     [ClientRpc]
     public void RpcInit(int creatureID, uint originalOwnerNetId)
     {
         if (hasAuthority)
         {
-            RpcSetControl(originalOwnerNetId, false);
+            RpcSetControl(originalOwnerNetId);
         }
         CreatureCard newCard = FindObjectOfType<PlayerManager>().GetCardFromCardList(creatureID);
         creatureCard = newCard;
