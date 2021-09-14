@@ -2519,12 +2519,14 @@ MonoBehaviour:
   turnImage: {fileID: 21300000, guid: 198eec11794d7df428aff2563624ca1f, type: 3}
   waitingImage: {fileID: 21300000, guid: 8ef10a95374d4f149a917907ed9e84bb, type: 3}
   isTurn: 0
-  highlightTurn: 1
-  highlightWaiting: 0
+  soundTurn: 1
+  soundWaiting: 0
+  turnAnimation: exchange
+  waitingAnimation: flip
   imageComponent: {fileID: 1159475470}
   audioSource: {fileID: 1159475468}
   animator: {fileID: 1159475476}
-  highlightSound: {fileID: 8300000, guid: ab039c0a5cd692b4d80a8212f3b9cd3a, type: 3}
+  changeSound: {fileID: 8300000, guid: ab039c0a5cd692b4d80a8212f3b9cd3a, type: 3}
 --- !u!114 &1159475470
 MonoBehaviour:
   m_ObjectHideFlags: 0
