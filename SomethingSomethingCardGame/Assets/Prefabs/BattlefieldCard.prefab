@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -7333016617953752610}
   - component: {fileID: -2990782899854864261}
   - component: {fileID: 2662672815803164112}
+  - component: {fileID: 1442791999452689623}
   m_Layer: 7
   m_Name: BattlefieldCard
   m_TagString: Untagged
@@ -183,6 +184,20 @@ MonoBehaviour:
   - {fileID: 8753312850135513869}
   - {fileID: 7041748439818805235}
   attackScoreColors: []
+  playerManager: {fileID: 0}
+--- !u!114 &1442791999452689623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003232512257577331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8801dbbe3d6f14cab2c43ef3c80127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiatedCard: {fileID: 2808468656847496804}
 --- !u!1 &2311593747382252133
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction4: 3
+  defaultColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &4870577465695406237
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction4: 2
+  defaultColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &6072744475952282358
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction4: 1
+  defaultColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &6395337241555394396
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,3 +723,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction4: 0
+  defaultColor: {r: 0, g: 0, b: 0, a: 1}
