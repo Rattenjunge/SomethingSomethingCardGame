@@ -2759,7 +2759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnImage: {fileID: 21300000, guid: 4fa93716c312dee40813d5f99472de5c, type: 3}
   waitingImage: {fileID: 21300000, guid: 8ef10a95374d4f149a917907ed9e84bb, type: 3}
-  isTurn: 1
+  isTurn: 0
   soundTurn: 1
   soundWaiting: 0
   turnAnimation: exchange
