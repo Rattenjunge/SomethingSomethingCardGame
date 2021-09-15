@@ -56,7 +56,7 @@ public class TurnIndicationController : MonoBehaviour {
 		if (CurrentAnimation == "") {
 			imageComponent.sprite = CurrentImage;
 		} else {
-			animator.Play(CurrentAnimation);
+			animator.Play(CurrentAnimation, -1, 0);
 		}
 
 		if (CurrentSound) {
