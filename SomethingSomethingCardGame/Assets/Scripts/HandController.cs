@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 
-[RequireComponent(typeof(HorizontalLayoutGroup))]
 public class HandController : MonoBehaviour
 {
     [SerializeField] private GameObject cardPrefab;
@@ -36,6 +35,6 @@ public class HandController : MonoBehaviour
         cardsInHand.Add(newCard);
 
         var newCardObject = GameObject.Instantiate(cardPrefab, this.transform);
-        newCardObject.GetComponent<CardController>().Init(newCard);
+        newCardObject.GetComponent<HandCardController>().Init(newCard);
     }
 }

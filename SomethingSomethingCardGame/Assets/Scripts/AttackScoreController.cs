@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class AttackScoreController : MonoBehaviour
 {
     [SerializeField] public Direction4 direction4;
+    [SerializeField] private Color defaultColor = Color.black;
     private Text text;
     private List<AttackScoreColor> attackScoreColors;
 
@@ -23,6 +24,7 @@ public class AttackScoreController : MonoBehaviour
     // Start is called before the first frame update
     public void SetAttackScore(int attackPoints)
     {
+        text.color = defaultColor;
         foreach (var score in attackScoreColors)
         {
             if (attackPoints <= score.highestScore)

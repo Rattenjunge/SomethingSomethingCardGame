@@ -197,7 +197,7 @@ public class PlayerManager : NetworkBehaviour
             InstantiatedCard card = Instantiate(HandCardPrefab, new Vector2(+0, 0), Quaternion.identity);
             int index = Random.Range(0, cardDeck.Count);
             card.playableCard = cardDeck[index];
-            card.GetComponent<CardController>().Init(card.playableCard as CreatureCard);
+            card.GetComponent<HandCardController>().Init(card.playableCard as CreatureCard);
             HandCards.Add(card.gameObject);
             cardDeck.RemoveAt(index);
             card.transform.SetParent(playerArea.transform);

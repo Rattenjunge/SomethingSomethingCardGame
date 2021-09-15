@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HandCardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private float scaleFactorZoomIn = 1f;
     [SerializeField] private float scaleFactorZoomOut = 0.5f;
