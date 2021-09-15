@@ -35,6 +35,10 @@ public class CardMover : NetworkBehaviour
             return;
         }
 
+        if (playerManager.localPlayerHasActiveTurn == false) {
+            return;
+        }
+
         isDragging = true;
         startParent = transform.parent.gameObject;
         startPosition = transform.position;

@@ -22,7 +22,7 @@ public class PlayerManager : NetworkBehaviour
     private BattleCalculation battleCalculation;
 
     public int numberOfPlayers = 0;
-    private bool localPlayerHasActiveTurn = false;
+    public bool localPlayerHasActiveTurn = false;
     private bool cardsDealtThisTurn = false;
     private List<uint> connectedPlayerIds = new List<uint>();
     //private int localId;
