@@ -17,7 +17,7 @@ public class WheelLayoutGroup : MonoBehaviour {
 		}
 	}
 
-	private void ArrangeChildren() {
+	public void ArrangeChildren() {
 		float initialAngle = degreePadding * (transform.childCount - 1) / 2;
 
 		for (int i = 0; i < transform.childCount; i++) {
