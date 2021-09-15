@@ -332,8 +332,6 @@ public class PlayerManager : NetworkBehaviour
         NetworkIdentity networkIdentity = NetworkClient.connection.identity;
         PlayerManager playerManager = networkIdentity.GetComponent<PlayerManager>();
   
-        readyButton.SetActive(true);
-        readyButton.GetComponent<ReadyButtonController>().ResetButton();
         DropZone[] dropZones = FindObjectsOfType<DropZone>();
         foreach (var item in dropZones)
         {
@@ -372,7 +370,12 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log("TYPO in Winstate");
         }
+
         CleanUpAfterGame();
+
+        readyButton.SetActive(true);
+        readyButton.GetComponent<ReadyButtonController>().ResetButton();
+        readyButton.GetComponent<ReadyButtonController>().SetWinState(WinState);
     }
 
 
