@@ -12,26 +12,16 @@ public class PlayerManager : NetworkBehaviour
     public InstantiatedCard BattlefieldCardPrefab;
     public InstantiatedCard HandCardPrefab;
     public BattleCalculation BattleCalculationPrefab;
-    //  public bool FightOver
-    //  {
-    //      get { return fightOver; }
-    //      set
-    //      {
-    //          fightOver = value;
-    //          if (value == true)
-    //              FindWinner();
-    //      }
-    //  }
 
+
+    public List<CreatureCard> cards = new List<CreatureCard>();
+    public List<CreatureCard> cardDeck = new List<CreatureCard>();
     private GameObject readyButton;
     private GameObject playerArea;
     private TurnIndicationController turnIndicator;
-    private List<CreatureCard> cards = new List<CreatureCard>();
-    private List<CreatureCard> cardDeck = new List<CreatureCard>();
     private BattleCalculation battleCalculation;
-    private bool fightOver = false;
 
-    private int numberOfPlayers = 0;
+    public int numberOfPlayers = 0;
     private bool localPlayerHasActiveTurn = false;
     private bool cardsDealtThisTurn = false;
     private List<uint> connectedPlayerIds = new List<uint>();
@@ -245,7 +235,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 manager.RpcStartTurn(connectedPlayerIds[currentActivePlayerIndex]);
             }
-
+            StartCoroutine(WaitSoLastCardCanSpawn());
         }
         else //Find the playermanager that IS owned by the server and call CmdCreateCardOnServer there.
         {
@@ -257,7 +247,6 @@ public class PlayerManager : NetworkBehaviour
                 }
             }
         }
-        CmdCalculateWinner();
     }
 
     //TODO: originalOwnerID isn't used
@@ -337,30 +326,31 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-
     void CleanUpAfterGame()
     {
+
+        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+        PlayerManager playerManager = networkIdentity.GetComponent<PlayerManager>();
+  
+        readyButton.SetActive(true);
+        readyButton.GetComponent<ReadyButtonController>().ResetButton();
         DropZone[] dropZones = FindObjectsOfType<DropZone>();
         foreach (var item in dropZones)
         {
             item.GetComponent<BoxCollider2D>().enabled = true;
-
         }
-        foreach (var item in HandCards)
+        foreach (var item in playerManager.HandCards)
         {
             Destroy(item);
         }
-        HandCards.Clear();
-        cardDeck.Clear();
+        playerManager.HandCards.Clear();
+        playerManager.cardDeck.Clear();
 
         for (int i = 0; i < 20; i++)
         {
-
-            cardDeck.Add(cards[Random.Range(0, cards.Count)]);
+            playerManager.cardDeck.Add(playerManager.cards[Random.Range(0, playerManager.cards.Count)]);
         }
-        readyButton.SetActive(true);
-        readyButton.GetComponent<ReadyButtonController>().ResetButton();
-        numberOfPlayers = 0;
+        playerManager.numberOfPlayers = 0;
     }
 
     [TargetRpc]
@@ -382,15 +372,16 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log("TYPO in Winstate");
         }
-
+        CleanUpAfterGame();
     }
 
 
 
 
-    [Command]
+    [Server]
     void CmdCalculateWinner()
     {
+
         DropZone[] gridDropZones = FindObjectsOfType<DropZone>();
         foreach (var item in gridDropZones)
         {
@@ -405,11 +396,7 @@ public class PlayerManager : NetworkBehaviour
             return;
         foreach (var item in gridDropZones)
         {
-            if(item.transform.GetChild(0).GetComponent<BattlefieldCard>() == null)
-            {
-                Debug.Log("ERROR");
-                return;
-            }
+
             if (item.transform.GetChild(0).GetComponent<BattlefieldCard>().currentOwner == playerManagers[0].netId)
                 Player1Count++;
             else
@@ -420,6 +407,7 @@ public class PlayerManager : NetworkBehaviour
         {
             TargetDisplayWinner(playerManagers[0].GetComponent<NetworkIdentity>().connectionToClient, "WIN");
             TargetDisplayWinner(playerManagers[1].GetComponent<NetworkIdentity>().connectionToClient, "LOST");
+
         }
         else if (Player1Count < PLayer2Count)
         {
@@ -434,5 +422,19 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
+
+    IEnumerator WaitSoLastCardCanSpawn()
+    {
+        // bool gameIsFinished = true;
+        yield return new WaitForSeconds(0.2f);
+        {
+            PlayerManager playerManager;
+            NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+            playerManager = networkIdentity.GetComponent<PlayerManager>();
+            if (playerManager.isServer && hasAuthority)
+                CmdCalculateWinner();
+        }
+
+    }
 
 }

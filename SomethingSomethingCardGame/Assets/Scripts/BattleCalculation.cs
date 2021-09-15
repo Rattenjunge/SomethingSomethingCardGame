@@ -6,7 +6,6 @@ using UnityEngine;
 public class BattleCalculation : NetworkBehaviour
 {
     BattleCalculation Instance;
-    private bool Fought = false;
     DropZone[,] gridDropZones = new DropZone[4, 4];
     PlayerManager playerManager;
     private void Start()
@@ -25,7 +24,6 @@ public class BattleCalculation : NetworkBehaviour
     [Command]
     public void CmdCalculateBattle(GameObject cellObject, GameObject playedCardObject, uint playerNetId)
     {
-        Fought = false;
 
         //Calculation worked for the host, even ownership swapped! did not work for the other client tho! 
         DropZone cell = cellObject.GetComponent<DropZone>();
@@ -54,13 +52,8 @@ public class BattleCalculation : NetworkBehaviour
             if (cleanNeighbourAttack < playedAttack)
             {
                 RpcSetOwnership(neighbourPosition, playerNetId);
-                Fought = true;
             }
         }
-        // if(!Fought && hasAuthority)
-        // {
-        //     RpcTellClientFightisOver();
-        // }
     }
     private int? GetCellAttack(Vector2Int gridPosition, Direction4 attackDirection)
     {
@@ -132,13 +125,5 @@ public class BattleCalculation : NetworkBehaviour
             this.Direction = direction;
         }
     }
- //[ClientRpc]
- //void RpcTellClientFightisOver()
- //{
- //    playerManager.FightOver = true;
- //}
- //
-
-
   
 }
