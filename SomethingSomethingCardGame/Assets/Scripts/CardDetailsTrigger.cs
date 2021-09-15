@@ -19,7 +19,6 @@ public class CardDetailsTrigger : MonoBehaviour, IPointerClickHandler {
 	}
 
 	public void OnPointerClick(PointerEventData eventData) {
-		Debug.Log(eventData);
 		if (detailsController == null) {
 			return;
 		}
