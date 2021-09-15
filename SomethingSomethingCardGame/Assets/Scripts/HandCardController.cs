@@ -30,7 +30,7 @@ public class HandCardController : MonoBehaviour, IPointerEnterHandler, IPointerE
 	private void OnEnable() {
 		rect = GetComponent<RectTransform>();
 		audioSource = GetComponent<AudioSource>();
-		ZoomCard(false);
+		rect.localScale = Vector3.one * scaleFactorZoomOut;
 	}
 
 	public void Init(CreatureCard newCard) {
