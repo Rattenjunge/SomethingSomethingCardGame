@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: CrawlingCrab
+  m_Name: Night Watcher
   m_EditorClassIdentifier: 
-  Id: 0
-  Name: Crawling Crab
-  FaceImage: {fileID: 21300000, guid: 3c6f0ac1ed7d0a24badc6a0c21ea05ed, type: 3}
-  FlavourText: Nothing can stop the carcinisation!
-  NorthAttack: 0
-  EastAttack: 7
-  SouthAttack: 1
-  WestAttack: 7
+  Id: 3
+  Name: Night Watcher
+  FaceImage: {fileID: 21300000, guid: 2662997414702c1408c0189a7a89a390, type: 3}
+  FlavourText: Barely visible in the night, but always there to stir up a fight.
+  NorthAttack: 1
+  EastAttack: 1
+  SouthAttack: 3
+  WestAttack: 1

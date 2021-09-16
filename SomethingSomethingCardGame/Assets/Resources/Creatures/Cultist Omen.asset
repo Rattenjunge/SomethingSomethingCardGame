@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: SwiftySquirrel
+  m_Name: Cultist Omen
   m_EditorClassIdentifier: 
-  Id: 6
-  Name: Swifty Squirrel
-  FaceImage: {fileID: 21300000, guid: a02c2f195c5749144ad1d42f8c4c2764, type: 3}
-  FlavourText: Swoop and you are gone -
-  NorthAttack: 1
-  EastAttack: 4
-  SouthAttack: 2
-  WestAttack: 4
+  Id: 1
+  Name: Cultist Omen
+  FaceImage: {fileID: 21300000, guid: b1f9a9c91ed1a544dbab9f3afe4fabca, type: 3}
+  FlavourText: Since the beginning of time, they have only been beaten once. Never
+    again.
+  NorthAttack: 8
+  EastAttack: 9
+  SouthAttack: 8
+  WestAttack: 9

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: LingeringLemur
+  m_Name: Lewis
   m_EditorClassIdentifier: 
-  Id: 5
-  Name: Lingering Lemur
-  FaceImage: {fileID: 21300000, guid: 2b0b9d99ef4b4c740b3adbaf32f4af6c, type: 3}
-  FlavourText: Waiting, watching, ready to fight - !
-  NorthAttack: 1
+  Id: 4
+  Name: Lewis
+  FaceImage: {fileID: 21300000, guid: d2fd99a4e60bc78468221fc352aada71, type: 3}
+  FlavourText: Hey there, Fella! Where are you headed? Might I join you on this novel
+    adventure?
+  NorthAttack: 2
   EastAttack: 2
-  SouthAttack: 4
-  WestAttack: 5
+  SouthAttack: 2
+  WestAttack: 0

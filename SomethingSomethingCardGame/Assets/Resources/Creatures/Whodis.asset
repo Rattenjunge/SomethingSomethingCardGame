@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: KlickingKraken
+  m_Name: Whodis
   m_EditorClassIdentifier: 
-  Id: 4
-  Name: Klicking Kraken
-  FaceImage: {fileID: 21300000, guid: 21d2b0c24f4bfe349b391c25c90967fe, type: 3}
-  FlavourText: Rising from deep below .. a noise, but there is more
-  NorthAttack: 8
-  EastAttack: 4
+  Id: 6
+  Name: Whodis
+  FaceImage: {fileID: 21300000, guid: 64c9175d75d1e914eac1895431ea10ff, type: 3}
+  FlavourText: ???
+  NorthAttack: 5
+  EastAttack: 6
   SouthAttack: 1
-  WestAttack: 3
+  WestAttack: 6

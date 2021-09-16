@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: FantasticFrog
+  m_Name: Plantox
   m_EditorClassIdentifier: 
-  Id: 2
-  Name: Fantastic Frog
-  FaceImage: {fileID: 21300000, guid: 2662997414702c1408c0189a7a89a390, type: 3}
-  FlavourText: Jumps up and down, and if in danger, also away.
-  NorthAttack: 3
+  Id: 5
+  Name: Plantox
+  FaceImage: {fileID: 21300000, guid: 43e21fd848be53b4d8f423eedb8aae4a, type: 3}
+  FlavourText: Makes sure every plant grows to something gorgeous - and not get eaten
+    before. Shy, but oh my.
+  NorthAttack: 1
   EastAttack: 2
   SouthAttack: 4
-  WestAttack: 2
+  WestAttack: 6
