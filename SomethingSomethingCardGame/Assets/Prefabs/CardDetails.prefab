@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221898067065747409}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1.3128053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -128,8 +128,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.6218, y: -105.36358}
-  m_SizeDelta: {x: 160.9643, y: 146.0706}
+  m_AnchoredPosition: {x: -0.029188, y: -105.36358}
+  m_SizeDelta: {x: 154.14, y: 146.0706}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6822206040798774744
 CanvasRenderer:
@@ -160,19 +160,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: ab736c320e96fc246af40e1cd1e047f6, type: 3}
+    m_Font: {fileID: 12800000, guid: c7a36bc5df12ceb4fb43916497666742, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 15
+    m_MinSize: 14
     m_MaxSize: 20
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Hello World!
+    m_LineSpacing: 0.95
+  m_Text: After being used in many unspeakable rituals by its former master, this
+    doll now roams the earth looking for a new master who can use its power to cause
+    even more despair.
 --- !u!1 &2297366920176913346
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ab736c320e96fc246af40e1cd1e047f6
+guid: c7a36bc5df12ceb4fb43916497666742
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Fairwall Sans
+  - Bad Comic
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

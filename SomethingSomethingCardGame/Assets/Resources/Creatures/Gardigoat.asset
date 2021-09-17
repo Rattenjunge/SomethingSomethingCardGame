@@ -15,9 +15,8 @@ MonoBehaviour:
   Id: 7
   Name: Gardigoat
   FaceImage: {fileID: 21300000, guid: 4f41789ebc54213488c5cba984bd063f, type: 3}
-  FlavourText: Believed to be a spirit of the forest. This creature will protect
-    the wildlife and vegetation of the forest. However, when several of them are
-    in the same place, they will instead waste their time charging at each other.
+  FlavourText: Believed to be a spirit of the forest. It protects its wildlife and
+    vegetation... often though they end up charging at each other for fun.
   NorthAttack: 8
   EastAttack: 1
   SouthAttack: 4
