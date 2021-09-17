@@ -5,15 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ReadyButtonController : MonoBehaviour {
-	[SerializeField] private Sprite victorySprite;
-	[SerializeField] private Sprite defeatSprite;
-	[SerializeField] private Sprite drawSprite;
-	[SerializeField] private Image winStateImage;
+	[SerializeField] private Sprite pressedImage;
+	[SerializeField] private Sprite unpressedImage;
+	[SerializeField] private Image buttonFace;
 
 	bool clicked = false;
 	PlayerManager playerManager;
 
-
+	private void Awake() {
+		ResetButton();
+	}
 
 	public void OnClick() {
 		if (playerManager == null) {
@@ -22,35 +23,17 @@ public class ReadyButtonController : MonoBehaviour {
 		}
 
 		if (clicked) {
-			clicked = false;
-			GetComponentInChildren<Text>().text = "Ready";
+			ResetButton();
 			playerManager.CmdPlayerReady(playerManager.netId, false);
 		} else {
 			clicked = true;
-			GetComponentInChildren<Text>().text = "Cancel";
+			buttonFace.sprite = pressedImage;
 			playerManager.CmdPlayerReady(playerManager.netId, true);
 		}
 	}
 
 	public void ResetButton() {
 		clicked = false;
-		GetComponentInChildren<Text>().text = "Ready";
-
-	}
-
-	public void SetWinState(string winState) {
-		winStateImage.enabled = true;
-		switch (winState) {
-			case "WIN":
-				winStateImage.sprite = victorySprite;
-				break;
-			case "LOST":
-				winStateImage.sprite = defeatSprite;
-				break;
-			case "DRAW":
-			default:
-				winStateImage.sprite = drawSprite;
-				break;
-		}
+		buttonFace.sprite = unpressedImage;
 	}
 }

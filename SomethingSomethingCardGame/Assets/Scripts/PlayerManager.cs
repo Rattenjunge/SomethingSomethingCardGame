@@ -16,6 +16,7 @@ public class PlayerManager : NetworkBehaviour
 
     public List<CreatureCard> cards = new List<CreatureCard>();
     public List<CreatureCard> cardDeck = new List<CreatureCard>();
+    private GameObject gameState;
     private GameObject readyButton;
     private GameObject playerArea;
     private TurnIndicationController turnIndicator;
@@ -75,6 +76,7 @@ public class PlayerManager : NetworkBehaviour
         }
 
         readyButton = GameObject.FindObjectOfType<ReadyButtonController>().gameObject;
+        gameState = GameObject.FindObjectOfType<GameStateController>().gameObject;
     }
     [Command]
     public void CmdSpawnBattleCalculator()
@@ -134,7 +136,7 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     public void RpcRemoveReadyButton()
     {
-        readyButton.SetActive(false);
+        gameState.SetActive(false);
     }
 
 
@@ -373,9 +375,9 @@ public class PlayerManager : NetworkBehaviour
 
         CleanUpAfterGame();
 
-        readyButton.SetActive(true);
+        gameState.SetActive(true);
+        gameState.GetComponent<GameStateController>().SetWinState(WinState);
         readyButton.GetComponent<ReadyButtonController>().ResetButton();
-        readyButton.GetComponent<ReadyButtonController>().SetWinState(WinState);
     }
 
 
