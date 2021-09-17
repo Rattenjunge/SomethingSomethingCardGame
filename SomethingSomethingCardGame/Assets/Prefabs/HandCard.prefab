@@ -238,15 +238,7 @@ MonoBehaviour:
   clickSound: {fileID: 8300000, guid: c9c48292cf2a22544acc2e5d34bd0235, type: 3}
   hoverSound: {fileID: 8300000, guid: 204d8b789012cc7408f2b9fddfb81ff2, type: 3}
   placedSound: {fileID: 8300000, guid: ab039c0a5cd692b4d80a8212f3b9cd3a, type: 3}
-  attackScoreColors:
-  - highestScore: 0
-    color: {r: 0, g: 0, b: 0, a: 1}
-  - highestScore: 3
-    color: {r: 0.23870182, g: 0.5, b: 0.18584904, a: 1}
-  - highestScore: 6
-    color: {r: 0.5849056, g: 0.38249034, b: 0.02979703, a: 1}
-  - highestScore: 10
-    color: {r: 0.5283019, g: 0.22308953, b: 0.17643286, a: 1}
+  attackScoreColors: []
   attackScoreControllers:
   - {fileID: 3634696560874974362}
   - {fileID: 2245016501753429537}
