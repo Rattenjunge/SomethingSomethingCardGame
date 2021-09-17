@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: Dragon Rat
+  m_Name: Ryu
   m_EditorClassIdentifier: 
   Id: 2
   Name: Dragon Rat
   FaceImage: {fileID: 21300000, guid: f697af7187560fd45bf03707c41c1b13, type: 3}
-  FlavourText: Only seen in the most untouched forest, these creatures are ready
-    to protect themselves.
+  FlavourText: This dragon like creature roams the countryside at night while the
+    villagers are asleep. It is said that people who are lucky enough to see one,
+    will be granted good luck for the rest of their lives.
   NorthAttack: 2
   EastAttack: 2
   SouthAttack: 4

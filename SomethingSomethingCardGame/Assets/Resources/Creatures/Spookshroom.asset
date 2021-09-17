@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: Abstractra
+  m_Name: Spookshroom
   m_EditorClassIdentifier: 
-  Id: 0
-  Name: Abstractra
-  FaceImage: {fileID: 21300000, guid: 80840657f17ce0b4d9c4973b35cc1107, type: 3}
-  FlavourText: "After being infuriated by the fact that nobody \u201Cgot\u201D it,
-    this abstract art piece came to life and now wreaks havoc."
-  NorthAttack: 9
-  EastAttack: 7
-  SouthAttack: 0
-  WestAttack: 8
+  Id: 11
+  Name: Spookshroom
+  FaceImage: {fileID: 21300000, guid: 8c1a673913fde3e40a4ac66362f8232f, type: 3}
+  FlavourText: Spooky? Yes. Cause they are a mushroom. No FUNgus allowed.
+  NorthAttack: 4
+  EastAttack: 0
+  SouthAttack: 1
+  WestAttack: 0

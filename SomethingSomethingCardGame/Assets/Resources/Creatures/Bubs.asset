@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: Abstractra
+  m_Name: Bubs
   m_EditorClassIdentifier: 
-  Id: 0
-  Name: Abstractra
-  FaceImage: {fileID: 21300000, guid: 80840657f17ce0b4d9c4973b35cc1107, type: 3}
-  FlavourText: "After being infuriated by the fact that nobody \u201Cgot\u201D it,
-    this abstract art piece came to life and now wreaks havoc."
-  NorthAttack: 9
-  EastAttack: 7
-  SouthAttack: 0
-  WestAttack: 8
+  Id: 16
+  Name: Bubs
+  FaceImage: {fileID: 21300000, guid: 8fb0b4858df34ba4e82d7a152aae5feb, type: 3}
+  FlavourText: "Her past isn\u2019t as clean as she looks. She has done some sh*t."
+  NorthAttack: 0
+  EastAttack: 3
+  SouthAttack: 2
+  WestAttack: 3

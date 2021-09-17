@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
-  m_Name: Abstractra
+  m_Name: Mushi
   m_EditorClassIdentifier: 
-  Id: 0
-  Name: Abstractra
-  FaceImage: {fileID: 21300000, guid: 80840657f17ce0b4d9c4973b35cc1107, type: 3}
-  FlavourText: "After being infuriated by the fact that nobody \u201Cgot\u201D it,
-    this abstract art piece came to life and now wreaks havoc."
-  NorthAttack: 9
-  EastAttack: 7
-  SouthAttack: 0
-  WestAttack: 8
+  Id: 18
+  Name: Mushi
+  FaceImage: {fileID: 21300000, guid: c793fdfa772d3b5419c61a01ec8a90ef, type: 3}
+  FlavourText: Free hugs for everyone! Sadly, you won't survive it tho.
+  NorthAttack: 6
+  EastAttack: 4
+  SouthAttack: 1
+  WestAttack: 3
