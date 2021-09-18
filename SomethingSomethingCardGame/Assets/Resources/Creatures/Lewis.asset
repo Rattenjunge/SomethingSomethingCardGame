@@ -19,5 +19,5 @@ MonoBehaviour:
     And a bit of a perv.
   NorthAttack: 2
   EastAttack: 2
-  SouthAttack: 2
-  WestAttack: 0
+  SouthAttack: 0
+  WestAttack: 2
