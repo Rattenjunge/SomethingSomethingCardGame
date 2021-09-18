@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class HandCardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 	[SerializeField] private float scaleFactorZoomIn = 1f;
 	[SerializeField] private float scaleFactorZoomOut = 0.5f;
+	[SerializeField] private float translateYZoomIn = 75f;
 	[SerializeField] private AudioClip clickSound;
 	[SerializeField] private AudioClip hoverSound;
 	[SerializeField] private AudioClip placedSound;
@@ -50,7 +51,7 @@ public class HandCardController : MonoBehaviour, IPointerEnterHandler, IPointerE
 
 			rect.localScale = Vector3.one * scaleFactorZoomIn;
 			rect.rotation = Quaternion.identity;
-			rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, 62);
+			rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, translateYZoomIn);
 			rect.SetAsLastSibling();
 		} else {
 			rect.localScale = Vector3.one * scaleFactorZoomOut;
