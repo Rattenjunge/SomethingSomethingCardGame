@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaee5dba78a1ff42b0bf60e70c38d34, type: 3}
+  m_Name: Lavalad
+  m_EditorClassIdentifier: 
+  Id: 8
+  Name: Lavalad
+  FaceImage: {fileID: 21300000, guid: a31f13941ce520a4ca8d4cf38aa80e12, type: 3}
+  FlavourText: "In the good ol'times, boys were 2000\xB0 hot. They don't come as
+    hot as this guy anymore."
+  NorthAttack: 2
+  EastAttack: 1
+  SouthAttack: 8
+  WestAttack: 3

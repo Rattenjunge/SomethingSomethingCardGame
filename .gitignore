@@ -72,3 +72,12 @@ SomethingSomethingCardGame/Temp/
 
 
 .idea/.idea.SomethingSomethingCardGame.dir/.idea/
+
+SomethingSomethingCardGame/.idea/
+
+SomethingSomethingCardGame/obj/
+
+SomethingSomethingCardGame/UserSettings/
+
+*.log
+SomethingSomethingCardGame_clone_0/
